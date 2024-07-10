@@ -47,16 +47,16 @@
 
   <!-- TITAN GTM -->
   <script>
-    let pageViewId;
+    let pageViewId
     function uuidv4() {
       return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-      );
+      )
     }
-    pageViewId = uuidv4();
-    var sysEnv = "desktop";
+    pageViewId = uuidv4()
+    var sysEnv = "desktop"
     if (window.innerWidth < 1000) {
-      sysEnv = "mobile";
+      sysEnv = "mobile"
     }
     window.dataLayerHybrid = {
       adserving: {
@@ -169,6 +169,17 @@
   </script> -->
   <!--END NINE KIT - LOADER BLOCK 2-->
 
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-WV7FLW7');</script>
+  <!-- End Google Tag Manager -->
+
 </head>
 
 <body class="relative">
@@ -183,7 +194,7 @@
   <!-- End Google Tag Manager (noscript) -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8H9J6GLFEH"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag("js", new Date()); gtag("config", "G-8H9J6GLFEH"); </script>
+  <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments) } gtag("js", new Date()); gtag("config", "G-8H9J6GLFEH"); </script>
 
 </body>
 
