@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import logo from '../../../assets/images/common/logo.svg'
 import CustomLink from '../../miscellaneous/CustomLink.tsx'
-import { BRAND_URL, BRAND_NAME } from '../../../js/global-variables.tsx'
+import { BRAND_URL, BRAND_NAME } from '../../../js/global-variables.ts'
 
 const Header = () => {
   return (
