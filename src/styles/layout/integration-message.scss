@@ -51,8 +51,6 @@
 
 header {
   &.integration-message {
-    animation: transformDown 2s ease-in forwards;
-    opacity: 0;
     position: absolute;
     top: 60px;
   }
@@ -60,7 +58,7 @@ header {
 
 footer {
   &.integration-message {
-   bottom: 60px;
+    bottom: 60px;
     position: absolute;
     .integration-text {
       color: white;

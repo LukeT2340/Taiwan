@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
 
 @import 'abstracts/variables';
 @import 'abstracts/utilities';
@@ -15,10 +16,3 @@
 
 @import 'layout/nine-masthead.scss';
 @import 'layout/integration-message';
-
-@import 'components/globals';
-@import 'components/hero';
-@import 'components/chapter-two';
-@import 'components/chapter-three';
-@import 'components/chapter-four';
-@import 'components/chapter-five';
