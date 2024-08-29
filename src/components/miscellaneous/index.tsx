@@ -34,3 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
     </a>
   )
 }
+
+export const Inner = ({ children }: { children: React.ReactNode }) => (
+  <div className="lg:max-w-[98vw] 2xl:max-w-[95vw] px-[20px] lg:px-0">{children}</div>
+)
