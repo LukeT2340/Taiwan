@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import LocomotiveScroll from 'locomotive-scroll'
-import { useMediaQuery } from 'react-responsive'
+// import { useMediaQuery } from 'react-responsive'
 import { LocomotiveScrollProps } from '../../types'
 
 const LocomotiveParallax: React.FC<LocomotiveScrollProps> = ({ locoScrollRef, children }) => {

@@ -12,6 +12,7 @@ export type ImageProps = {
 export type LocomotiveScrollProps = {
   locoScrollRef: RefObject<HTMLElement>
   children: React.ReactNode
+  el: HTMLElement
 }
 
 export type CustomLinkProps = {

@@ -16,10 +16,14 @@
 }
 
 @font-face {
-	font-family: 'ProximaNova';
-	src: url('../assets/fonts/ProximaNova-Regular.woff2') format('woff2');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'ProximaNova';
+  src: url('../assets/fonts/ProximaNova-Regular.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
+.prox-reg {
+  font-family: 'ProximaNova', Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}

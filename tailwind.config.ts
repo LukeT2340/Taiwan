@@ -7,6 +7,10 @@ export default {
         'bright-cyan': '#58F6F4',
         'dark-blue': '#192958',
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'],
+      },
+
       fontSize: {
         clampHeading: 'clamp(48px, 6vw, 92px)',
         clampHeading2: 'clamp(30px, 5vw, 54px)',
