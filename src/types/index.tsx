@@ -38,3 +38,10 @@ export type MotionImageProps = {
   transition?: { duration: number; delay: number; ease: string }
   className?: string
 }
+
+export interface AnimateTextProps {
+  elementRef: RefObject<HTMLDivElement>
+  selector: string
+  delay: number
+  inView: boolean
+}
