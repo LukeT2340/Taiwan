@@ -28,10 +28,10 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <a
       href={href}
-      className={`mb:w-[240px] max-w-[200px] py-4 px-4 ${bgColor} hover:opacity-90 ${textColor} z-10 font-bold text-center block sm:ml-0 mx-auto ${className}`}
+      className={`${bgColor} hover:opacity-90 ${textColor} z-10 font-bold text-center block mx-auto ${className}`}
       target="_blank"
       rel="sponsored noopener noreferrer">
-      <p className="inline sm:text-24 uppercase">{text}</p>
+      <p>{text}</p>
     </a>
   )
 }
