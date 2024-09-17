@@ -1,11 +1,11 @@
-import { RefObject } from 'react'
+import { RefObject } from "react"
 
 export type ImageProps = {
   src: string
   alt: string
   className?: string
-  'data-scroll'?: boolean
-  'data-scroll-speed'?: string
+  "data-scroll"?: boolean
+  "data-scroll-speed"?: string
   index?: number
 }
 
@@ -26,13 +26,14 @@ export type ButtonProps = {
   text: string
   bgColor?: string
   textColor?: string
+  className?: string
 }
 
 export type MotionImageProps = {
   src: string
   alt: string
-  'data-sccroll'?: boolean
-  'data-scroll-speed'?: string
+  "data-sccroll"?: boolean
+  "data-scroll-speed"?: string
   initial?: { opacity: number }
   whileInView?: { opacity: number }
   transition?: { duration: number; delay: number; ease: string }
