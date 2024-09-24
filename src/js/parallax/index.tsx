@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
-import LocomotiveScroll from 'locomotive-scroll'
+import { useEffect } from "react"
+import LocomotiveScroll from "locomotive-scroll"
 // import { useMediaQuery } from 'react-responsive'
-import { LocomotiveScrollProps } from '../../types'
+import { LocomotiveScrollProps, IExtendedLocomotiveScrollOptions } from "../../types"
 
 const LocomotiveParallax: React.FC<LocomotiveScrollProps> = ({ locoScrollRef, children }) => {
   const divRef = locoScrollRef as React.RefObject<HTMLDivElement>
@@ -19,7 +19,7 @@ const LocomotiveParallax: React.FC<LocomotiveScrollProps> = ({ locoScrollRef, ch
         smooth: true,
         lerp: 0.07,
         multiplier: 0.7,
-      })
+      } as IExtendedLocomotiveScrollOptions)
     }
   }, [divRef])
 

@@ -1,4 +1,5 @@
 import { RefObject } from "react"
+import { ILocomotiveScrollOptions } from "locomotive-scroll"
 
 export type ImageProps = {
   src: string
@@ -12,6 +13,10 @@ export type ImageProps = {
 export type LocomotiveScrollProps = {
   locoScrollRef: RefObject<HTMLElement>
   children: React.ReactNode
+  el: HTMLElement
+}
+
+export interface IExtendedLocomotiveScrollOptions extends ILocomotiveScrollOptions {
   el: HTMLElement
 }
 
