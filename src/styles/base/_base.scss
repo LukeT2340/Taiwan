@@ -32,9 +32,9 @@ html {
 body {
   @include font-opentype;
   @include font-smoothing;
-  font-family: 'ProximaNova', Arial, Helvetica, sans-serif;
+  font-family: "ProximaNova", Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
   font-weight: normal;
   line-height: 2em;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
