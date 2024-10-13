@@ -1,17 +1,17 @@
-import { motion } from 'framer-motion'
-import { ImageProps, CustomLinkProps, ButtonProps, MotionImageProps } from '../../types'
+import { motion } from "framer-motion"
+import { ImageProps, CustomLinkProps, ButtonProps, MotionImageProps } from "../../types"
 
 export const Image: React.FC<ImageProps> = (props) => {
   return <img {...props} />
 }
 
-export const CustomLink = ({ href, className = '', children }: CustomLinkProps) => {
+export const CustomLink = ({ href, className = "", children }: CustomLinkProps) => {
   return (
     <>
-      {' '}
+      {" "}
       <a href={href} className={className} target="_blank" rel="sponsored noopener noreferrer">
         {children}
-      </a>{' '}
+      </a>{" "}
     </>
   )
 }
@@ -21,9 +21,9 @@ export const MotionImage: React.FC<MotionImageProps> = (props) => <motion.img {.
 export const Button: React.FC<ButtonProps> = ({
   href,
   text,
-  className
-  bgColor = 'black',
-  textColor = 'white',
+  className,
+  bgColor = "black",
+  textColor = "white",
 }) => {
   return (
     <a
