@@ -13,10 +13,11 @@ export type ImageProps = {
 export type LocomotiveScrollProps = {
   locoScrollRef: RefObject<HTMLElement>
   children: React.ReactNode
-  el: HTMLElement
+  el?: HTMLElement
 }
 
-export interface IExtendedLocomotiveScrollOptions extends ILocomotiveScrollOptions {
+export interface IExtendedLocomotiveScrollOptions
+  extends ILocomotiveScrollOptions {
   el: HTMLElement
 }
 
@@ -37,10 +38,10 @@ export type ButtonProps = {
 export type MotionImageProps = {
   src: string
   alt: string
-  "data-sccroll"?: boolean
+  "data-scroll"?: boolean
   "data-scroll-speed"?: string
-  initial?: { opacity: number }
-  whileInView?: { opacity: number }
+  initial?: { opacity?: number; scale?: number; y?: number }
+  whileInView?: { opacity?: number; scale?: number; y?: number }
   transition?: { duration: number; delay: number; ease: string }
   className?: string
 }
