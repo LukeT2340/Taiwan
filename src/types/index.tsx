@@ -42,6 +42,7 @@ export type MotionImageProps = {
   'data-scroll-speed'?: string;
   initial?: { opacity?: number; scale?: number; x?: number; y?: number };
   whileInView?: { opacity?: number; scale?: number; x?: number; y?: number };
+  animate?: { opacity?: number; scale?: number; x?: number; y?: number };
   transition?: { duration: number; delay: number; ease: string | number[] };
   viewport?: { once: boolean };
   className?: string;
