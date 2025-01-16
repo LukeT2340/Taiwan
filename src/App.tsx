@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import LocomotiveParallax from './js/parallax/index.tsx';
-import Header from './components/blocks/Header/Header.tsx';
-import Footer from './components/blocks/Footer/Footer.tsx';
+import LocomotiveParallax from './js/parallax';
+import Header from './components/blocks/Header';
+import Footer from './components/blocks/Footer';
 import Hero from './components/blocks/Hero';
-import SectionTwo from './components/blocks/SectionTwo/index.tsx';
-import SectionThree from './components/blocks/SectionThree/index.tsx';
+import SectionTwo from './components/blocks/SectionTwo';
+import SectionThree from './components/blocks/SectionThree';
 
 const App = () => {
   const locoScrollRef = useRef<HTMLElement>(null);

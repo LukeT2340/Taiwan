@@ -38,7 +38,7 @@ export type ButtonProps = {
 export type MotionImageProps = {
   src: string;
   alt: string;
-  'data-scroll'?: boolean;
+  'data-scroll'?: string;
   'data-scroll-speed'?: string;
   initial?: { opacity?: number; scale?: number; x?: number; y?: number };
   whileInView?: { opacity?: number; scale?: number; x?: number; y?: number };
