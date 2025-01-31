@@ -26,3 +26,29 @@
     transform: translateY(-15px);
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s linear forwards;
+}
+
+.fade-out {
+  animation: fadeOut 1s linear forwards;
+}

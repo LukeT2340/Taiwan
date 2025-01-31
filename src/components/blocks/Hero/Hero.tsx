@@ -9,10 +9,12 @@ import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
-import { motion } from 'framer-motion';
+import ColorMesh from './ColorMesh';
+import { useMediaQuery } from 'react-responsive';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const wide = useMediaQuery({ minAspectRatio: '4/3' });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,22 +42,21 @@ const Hero: React.FC = () => {
   return (
     <section className="hero z-10">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
-        <motion.div
+        <div
           className="fixed inset-0 z-10 h-full w-full"
           ref={canvasContainerRef}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: 'linear' }}
         >
           <Canvas
             camera={{
               position: [0, 0, 3],
-              fov: 72,
+              fov: wide ? 70 : 80,
               near: 3,
               far: 30,
             }}
           >
             <CameraController />
+            <ColorMesh />
+
             <ForegroundImage
               textureUrl="/assets/images/desktop/Front.png"
               position={[0, 0, -2]}
@@ -87,7 +88,7 @@ const Hero: React.FC = () => {
             <Background
               textureUrl="/assets/images/desktop/Sky.png"
               position={[0, 0, -14]}
-              size={[55, 31]}
+              size={[60, 33.75]}
             />
             <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -1]}>
               <Cloud
@@ -123,7 +124,7 @@ const Hero: React.FC = () => {
               />
             </EffectComposer>
           </Canvas>
-        </motion.div>
+        </div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">

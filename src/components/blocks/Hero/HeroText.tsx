@@ -3,21 +3,21 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 const HeroText = () => {
-  const h2ContainerRef = useRef<HTMLDivElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!h2ContainerRef.current) return;
+      if (!textContainerRef.current) return;
 
       const normalizedScroll = window.scrollY / window.innerHeight;
 
       if (normalizedScroll > 1) return;
 
-      h2ContainerRef.current.style.scale = (
+      textContainerRef.current.style.scale = (
         1 +
-        normalizedScroll * 8
+        normalizedScroll * 3
       ).toString();
-      h2ContainerRef.current.style.transform = `translateY(${-4 * normalizedScroll}vh)`;
+      textContainerRef.current.style.transform = `translateY(${-2 * normalizedScroll}vh)`;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,7 +30,10 @@ const HeroText = () => {
   return (
     <mesh position={[0, 0, 0]}>
       <Html className="pointer-events-none" center={true} zIndexRange={[0, 10]}>
-        <div className="mx-auto max-w-[541px] font-taiwan">
+        <div
+          className="mx-auto max-w-[541px] font-taiwan"
+          ref={textContainerRef}
+        >
           <motion.h1
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -38,7 +41,7 @@ const HeroText = () => {
           >
             Travel through Taiwan
           </motion.h1>
-          <div ref={h2ContainerRef} className="ml-5 lg:ml-10">
+          <div className="ml-5 lg:ml-10">
             <motion.h2
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
