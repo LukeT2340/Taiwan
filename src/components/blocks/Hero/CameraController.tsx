@@ -58,6 +58,7 @@ function CameraController() {
     let targetX = 0;
     let targetY = 0;
 
+    // Seems to not work on IOS mobile
     if (isMobile) {
       // Use gyroscope data for mobile control
       const { beta, gamma } = deviceMotion;
