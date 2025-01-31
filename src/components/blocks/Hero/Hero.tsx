@@ -7,7 +7,7 @@ import CameraController from './CameraController';
 import Background from './Background';
 import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
-import imageOne from '../../../assets/images/desktop/1.jpg';
+import imageOne from '/assets/images/desktop/1.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
 
 const Hero: React.FC = () => {
@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
     <section className="hero z-10">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
         <div
-          className="fixed inset-0 z-10 h-screen w-screen"
+          className="fixed inset-0 z-10 h-full w-full"
           ref={canvasContainerRef}
         >
           <Canvas
@@ -52,75 +52,61 @@ const Hero: React.FC = () => {
             }}
           >
             <CameraController />
-
-            {/* Scene Content */}
             <ForegroundImage
-              textureUrl="/src/assets/images/desktop/Front.png"
+              textureUrl="/assets/images/desktop/Front.png"
               position={[0, 0, -2]}
               size={[16, 9]}
               adjustWithScroll={true}
               adjustsWithScrollFactor={4}
             />
             <ForegroundImage
-              textureUrl="/src/assets/images/desktop/Mid.png"
+              textureUrl="/assets/images/desktop/Mid.png"
               position={[0, 0, -4]}
               size={[24, 13.5]}
               adjustWithScroll={true}
               adjustsWithScrollFactor={4}
             />
             <ForegroundImage
-              textureUrl="/src/assets/images/desktop/Back.png"
+              textureUrl="/assets/images/desktop/Back.png"
               position={[0, 0, -6]}
               size={[28, 15.75]}
               adjustWithScroll={true}
               adjustsWithScrollFactor={1}
             />
             <ForegroundImage
-              textureUrl="/src/assets/images/desktop/Back-Silhouette.png"
+              textureUrl="/assets/images/desktop/Back-Silhouette.png"
               position={[0, 0, -8]}
               size={[34, 19.7]}
               adjustWithScroll={false}
               adjustsWithScrollFactor={24}
             />
             <Background
-              textureUrl="/src/assets/images/desktop/Sky.png"
+              textureUrl="/assets/images/desktop/Sky.png"
               position={[0, 0, -14]}
               size={[55, 31]}
             />
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -5]}>
-              <Cloud
-                segments={300}
-                bounds={[13, 10, -12]}
-                volume={2}
-                color="white"
-                speed={0.2}
-                seed={22}
-                opacity={0.1}
-              />
-            </Clouds>
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -3]}>
-              <Cloud
-                segments={100}
-                bounds={[12, 4, -12]}
-                volume={4}
-                color="white"
-                speed={0.2}
-                seed={1}
-                opacity={0.3}
-              />
-            </Clouds>
             <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -1]}>
               <Cloud
                 segments={40}
-                bounds={[11, 2, -12]}
+                bounds={[11, 10, -12]}
                 volume={5}
                 color="white"
                 speed={0.2}
-                seed={25}
-                opacity={0.1}
+                seed={32}
+                opacity={0.05}
               />
             </Clouds>
-
+            <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -2]}>
+              <Cloud
+                segments={15}
+                bounds={[8, 3, -1]}
+                volume={2}
+                color="white"
+                speed={0.2}
+                seed={19}
+                opacity={0.03}
+              />
+            </Clouds>
             <HeroText />
 
             <EffectComposer multisampling={0}>

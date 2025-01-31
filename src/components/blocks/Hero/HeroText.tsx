@@ -34,7 +34,7 @@ const HeroText = () => {
           <motion.h1
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
+            transition={{ duration: 1.2, delay: 0.1, ease: 'easeOut' }}
           >
             Travel through Taiwan
           </motion.h1>
@@ -42,7 +42,7 @@ const HeroText = () => {
             <motion.h2
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
+              transition={{ duration: 1.2, delay: 0.1, ease: 'easeOut' }}
             >
               your way
             </motion.h2>

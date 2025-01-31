@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { ImageWithText, MotionImage } from '../../miscellaneous';
-import imageTwo from '../../../assets/images/desktop/2.jpg';
-import imageThree from '../../../assets/images/desktop/3.jpg';
-import imageFour from '../../../assets/images/desktop/4.png';
+import imageTwo from '/assets/images/desktop/2.jpg';
+import imageThree from '/assets/images/desktop/3.jpg';
+import imageFour from '/assets/images/desktop/4.png';
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);

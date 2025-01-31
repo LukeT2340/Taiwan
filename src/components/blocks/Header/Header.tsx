@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import logo from '../../../assets/images/common/logo.svg';
+import logo from '/assets/images/common/logo.svg';
 import { CustomLink } from '../../miscellaneous/index.tsx';
 import { BRAND_URL, BRAND_NAME } from '../../../js/global-variables.ts';
 
