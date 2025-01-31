@@ -23,6 +23,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Taiwan';
+  src: url('../assets/fonts/Taiwan.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .prox-reg {
   font-family: 'ProximaNova', Arial, Helvetica, sans-serif;
   font-weight: normal;

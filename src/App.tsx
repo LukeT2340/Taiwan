@@ -1,24 +1,21 @@
-import { useRef } from 'react';
-import LocomotiveParallax from './js/parallax';
 import Header from './components/blocks/Header';
 import Footer from './components/blocks/Footer';
 import Hero from './components/blocks/Hero';
 import SectionTwo from './components/blocks/SectionTwo';
 import SectionThree from './components/blocks/SectionThree';
+import SmoothScrolling from './js/smooth-scrolling';
 
 const App = () => {
-  const locoScrollRef = useRef<HTMLElement>(null);
-
   return (
     <div>
       <main>
         <Header />
         <article>
-          <LocomotiveParallax locoScrollRef={locoScrollRef}>
+          <SmoothScrolling>
             <Hero />
             <SectionTwo />
             <SectionThree />
-          </LocomotiveParallax>
+          </SmoothScrolling>
         </article>
         <Footer />
       </main>

@@ -2,13 +2,19 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      screens: {},
+      screens: {
+        lg: '1025px',
+        '2xl': '1800px',
+      },
       colors: {
         'bright-cyan': '#58F6F4',
         'dark-blue': '#192958',
+        orange: '#FF5629',
+        yellow: '#FFB42E',
       },
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
+        taiwan: ['Taiwan'],
       },
 
       fontSize: {
@@ -29,4 +35,4 @@ export default {
     },
   },
   plugins: [],
-}
+};
