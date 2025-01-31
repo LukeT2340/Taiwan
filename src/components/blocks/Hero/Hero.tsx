@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
               position={[0, 0, -2]}
               size={[16, 9]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={4}
+              adjustsWithScrollFactor={8}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Mid.png"
