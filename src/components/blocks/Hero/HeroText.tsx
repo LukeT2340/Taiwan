@@ -15,9 +15,9 @@ const HeroText = () => {
 
       textContainerRef.current.style.scale = (
         1 +
-        normalizedScroll * 3
+        normalizedScroll ** 1 * 3
       ).toString();
-      textContainerRef.current.style.transform = `translateY(${-2 * normalizedScroll}vh)`;
+      textContainerRef.current.style.transform = `translateY(${-16 * normalizedScroll}vh)`;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,14 +30,14 @@ const HeroText = () => {
   return (
     <mesh position={[0, 0, 0]}>
       <Html className="pointer-events-none" center={true} zIndexRange={[0, 10]}>
-        <div
+        <motion.div
           className="mx-auto max-w-[541px] font-taiwan"
           ref={textContainerRef}
         >
           <motion.h1
-            initial={{ x: -100, opacity: 0 }}
+            initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.1, ease: 'easeOut' }}
+            transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
           >
             Travel through Taiwan
           </motion.h1>
@@ -45,12 +45,12 @@ const HeroText = () => {
             <motion.h2
               initial={{ x: -300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1.2, delay: 0.1, ease: 'easeOut' }}
+              transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
             >
               your way
             </motion.h2>
           </div>
-        </div>
+        </motion.div>
       </Html>
     </mesh>
   );

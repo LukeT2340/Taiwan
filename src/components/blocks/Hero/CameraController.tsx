@@ -68,8 +68,8 @@ function CameraController() {
       // Use mouse-based control for desktop
       const mouseX = state.pointer.x;
       const mouseY = state.pointer.y;
-      targetX = lerp(cameraRef.current.position.x, mouseX * 0.3, 0.01);
-      targetY = lerp(cameraRef.current.position.y, mouseY * 0.3, 0.01);
+      targetX = lerp(cameraRef.current.position.x, mouseX * 0.35, 0.014);
+      targetY = lerp(cameraRef.current.position.y, mouseY * 0.35, 0.014);
     }
 
     cameraRef.current.position.x = targetX;

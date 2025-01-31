@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { useMediaQuery } from 'react-responsive';
+import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { Clouds, Cloud } from '@react-three/drei';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
@@ -10,7 +12,6 @@ import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
 import ColorMesh from './ColorMesh';
-import { useMediaQuery } from 'react-responsive';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -42,9 +43,12 @@ const Hero: React.FC = () => {
   return (
     <section className="hero z-10">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
-        <div
+        <motion.div
           className="fixed inset-0 z-10 h-full w-full"
           ref={canvasContainerRef}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
         >
           <Canvas
             camera={{
@@ -116,15 +120,15 @@ const Hero: React.FC = () => {
 
             <EffectComposer multisampling={0}>
               <DepthOfField
-                focusDistance={0.02}
-                focalLength={0.5}
-                bokehScale={6}
-                height={240}
-                width={480}
+                focusDistance={0.16}
+                focalLength={0.9}
+                bokehScale={4}
+                height={260}
+                width={260}
               />
             </EffectComposer>
           </Canvas>
-        </div>
+        </motion.div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
