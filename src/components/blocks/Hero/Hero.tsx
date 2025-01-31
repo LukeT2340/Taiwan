@@ -9,6 +9,7 @@ import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -39,9 +40,12 @@ const Hero: React.FC = () => {
   return (
     <section className="hero z-10">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
-        <div
+        <motion.div
           className="fixed inset-0 z-10 h-full w-full"
           ref={canvasContainerRef}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: 'linear' }}
         >
           <Canvas
             camera={{
@@ -119,7 +123,7 @@ const Hero: React.FC = () => {
               />
             </EffectComposer>
           </Canvas>
-        </div>
+        </motion.div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
