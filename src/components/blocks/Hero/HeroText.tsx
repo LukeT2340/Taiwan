@@ -7,7 +7,7 @@ const HeroText = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!textContainerRef.current) return;
+      if (!textContainerRef.current || window.innerWidth < 1025) return;
 
       const normalizedScroll = window.scrollY / window.innerHeight;
 

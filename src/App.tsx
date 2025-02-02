@@ -14,6 +14,7 @@ const App = () => {
           <SmoothScrolling>
             <Hero />
             <SectionTwo />
+
             {/* <SectionThree /> */}
           </SmoothScrolling>
         </article>

@@ -21,7 +21,7 @@ function Background({
   const [adjustedSize, setAdjustedSize] = useState<[number, number]>(size);
 
   useFrame(() => {
-    if (!adjustWithScroll) return;
+    if (!adjustWithScroll || window.innerWidth < 1025) return;
 
     const normalizedScroll = Math.min(window.scrollY / window.innerHeight, 1);
 

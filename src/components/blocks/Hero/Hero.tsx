@@ -15,21 +15,25 @@ import ColorMesh from './ColorMesh';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const wide = useMediaQuery({ minAspectRatio: '4/3' });
+  const wide = useMediaQuery({ minAspectRatio: '1.8' });
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!canvasContainerRef.current) return;
-
+      if (!canvasContainerRef.current || window.innerWidth < 1025) return;
       const scrollY = window.scrollY;
       const normalizedScroll = scrollY / window.innerHeight;
       if (normalizedScroll > 1) {
         canvasContainerRef.current.style.display = 'none';
         return;
       }
+      canvasContainerRef.current.style.opacity = '1';
       canvasContainerRef.current.style.display = 'block';
+
+      if (normalizedScroll < 0.5) return;
+
       canvasContainerRef.current.style.opacity = (
-        1 - normalizedScroll
+        1 -
+        (normalizedScroll - 0.5) / 0.5
       ).toString();
     };
 
@@ -44,7 +48,7 @@ const Hero: React.FC = () => {
     <section className="hero z-10">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
         <motion.div
-          className="fixed inset-0 z-10 h-full w-full"
+          className="inset-0 z-10 h-full w-full lg:fixed"
           ref={canvasContainerRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -53,27 +57,27 @@ const Hero: React.FC = () => {
           <Canvas
             camera={{
               position: [0, 0, 3],
-              fov: wide ? 70 : 80,
-              near: 3,
-              far: 30,
+              fov: wide ? 70 : 79,
+              near: 1,
+              far: 17,
             }}
           >
             <CameraController />
-            <ColorMesh />
+            {/* <ColorMesh /> */}
 
             <ForegroundImage
               textureUrl="/assets/images/desktop/Front.png"
               position={[0, 0, -2]}
               size={[16, 9]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={8}
+              adjustsWithScrollFactor={6}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Mid.png"
               position={[0, 0, -4]}
               size={[24, 13.5]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={4}
+              adjustsWithScrollFactor={3}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Back.png"
@@ -94,43 +98,34 @@ const Hero: React.FC = () => {
               position={[0, 0, -14]}
               size={[60, 33.75]}
             />
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -1]}>
+            {/* 
+            <Clouds material={THREE.MeshBasicMaterial} position={[-2, 3, 1]}>
               <Cloud
-                segments={40}
-                bounds={[11, 10, -12]}
-                volume={5}
+                segments={45}
+                bounds={[8, 0, 5]}
+                volume={0.1}
                 color="white"
-                speed={0.2}
-                seed={32}
-                opacity={0.05}
-              />
-            </Clouds>
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, -2, -2]}>
-              <Cloud
-                segments={15}
-                bounds={[8, 3, -1]}
-                volume={2}
-                color="white"
-                speed={0.2}
+                speed={0.3}
                 seed={19}
-                opacity={0.03}
+                opacity={0.8}
               />
-            </Clouds>
+            </Clouds> */}
+
             <HeroText />
 
             <EffectComposer multisampling={0}>
               <DepthOfField
-                focusDistance={0.16}
-                focalLength={0.9}
-                bokehScale={4}
-                height={260}
-                width={260}
+                focusDistance={0.2}
+                focalLength={0.4}
+                bokehScale={0.2}
+                height={220}
+                width={220}
               />
             </EffectComposer>
           </Canvas>
         </motion.div>
       </div>
-      <div className="block-two bg-orange pb-[75px] pt-[60vh]">
+      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
           <div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
             <CopyContainer>

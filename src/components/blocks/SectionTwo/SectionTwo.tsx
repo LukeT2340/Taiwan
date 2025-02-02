@@ -3,18 +3,26 @@ import { ImageWithText, MotionImage } from '../../miscellaneous';
 import imageTwo from '/assets/images/desktop/2.jpg';
 import imageThree from '/assets/images/desktop/3.jpg';
 import imageFour from '/assets/images/desktop/4.png';
+import imageFive from '/assets/images/desktop/5.jpg';
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !imageContainerRef.current) return;
 
       const sectionRect = sectionRef.current.getBoundingClientRect();
-      const sectionHeight = sectionRect.top - sectionRect.bottom;
-      console.log(sectionHeight);
-      //const normalizedScroll
+      const normalizedScroll =
+        (sectionRect.height - sectionRect.top) / sectionRect.height - 1;
+
+      if (normalizedScroll > 1 || normalizedScroll < 0) {
+        imageContainerRef.current.style.position = 'absolute';
+        return;
+      }
+
+      imageContainerRef.current.style.position = 'fixed';
     };
 
     document.addEventListener('scroll', handleScroll);
@@ -29,8 +37,8 @@ const SectionTwo: React.FC = () => {
       className="section-two relative bg-yellow pt-[109px]"
       ref={sectionRef}
     >
-      <div className="absolute left-[10vw] top-[62px]">
-        <div className="relative lg:w-[40vw] 2xl:w-[762px]">
+      <div className="absolute left-[10vw] top-[62px]" ref={imageContainerRef}>
+        <div className="relative lg:w-[36vw] 2xl:w-[762px]">
           <ImageWithText text="By rail" image={imageFour} noWrap={true} />
         </div>
       </div>
@@ -75,13 +83,11 @@ const SectionTwo: React.FC = () => {
           mass sky lantern releases during Lunar New Year, this is the line you
           need.
         </p>
-        <p>
-          Another narrow-gauge ride can be found on the Pingxi Line, winding
-          through rural villages and past waterfalls as it connects Taipei with
-          the highly scenic Keelung River Valley. And to experience the famous
-          mass sky lantern releases during Lunar New Year, this is the line you
-          need.
-        </p>
+        <MotionImage
+          src={imageThree}
+          alt="Taiwan’s well-developed rail network is a convenient and enjoyable way to travel around the island. High-speed options, the metro (MRT) and local routes offer unique glimpses into the island’s varied and stunning landscapes, big cities, and quieter rural towns."
+          className="mb-[30px] w-full rounded-[20px]"
+        />
         <p>
           With gorgeous mountainous terrain – more than 260 peaks form the spine
           of the island – it’s no surprise that two of the world’s most
@@ -103,7 +109,7 @@ const SectionTwo: React.FC = () => {
           plains, and take on Taiwan’s signature, winding mountain highways.
         </p>
         <MotionImage
-          src={imageThree}
+          src={imageFive}
           alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
           className="mb-[30px] w-full rounded-[20px]"
         />

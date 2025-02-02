@@ -21,7 +21,7 @@ function ForegroundImage({
   const texture = useLoader(TextureLoader, textureUrl);
 
   useFrame(() => {
-    if (!adjustWithScroll) return;
+    if (!adjustWithScroll || window.innerWidth < 1025) return;
 
     const normalizedScroll = Math.min(window.scrollY / window.innerHeight, 1);
 
