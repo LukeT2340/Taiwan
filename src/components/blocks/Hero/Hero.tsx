@@ -109,9 +109,9 @@ const Hero: React.FC = () => {
 
             <EffectComposer multisampling={0}>
               <DepthOfField
-                focusDistance={0.2}
-                focalLength={0.4}
-                bokehScale={0.2}
+                focusDistance={0.11}
+                focalLength={0.1}
+                bokehScale={0.1}
                 height={220}
                 width={220}
               />
