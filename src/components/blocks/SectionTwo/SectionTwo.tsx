@@ -4,25 +4,98 @@ import imageTwo from '/assets/images/desktop/2.jpg';
 import imageThree from '/assets/images/desktop/3.jpg';
 import imageFour from '/assets/images/desktop/4.png';
 import imageFive from '/assets/images/desktop/5.jpg';
+import imageSix from '/assets/images/desktop/6.png';
+import imageSeven from '/assets/images/desktop/7.jpg';
+import imageEight from '/assets/images/desktop/8.jpg';
+import imageNine from '/assets/images/desktop/9.jpg';
+import imageTen from '/assets/images/desktop/10.png';
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const imageInnerContainerRef = useRef<HTMLDivElement>(null);
+  const imageOuterContainerRef = useRef<HTMLDivElement>(null);
+  const copyContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current || !imageContainerRef.current) return;
+      if (
+        !sectionRef.current ||
+        !imageOuterContainerRef.current ||
+        !imageInnerContainerRef.current ||
+        !copyContainerRef.current
+      )
+        return;
 
-      const sectionRect = sectionRef.current.getBoundingClientRect();
+      const sectionRect = sectionRef?.current?.getBoundingClientRect();
+
       const normalizedScroll =
         (sectionRect.height - sectionRect.top) / sectionRect.height - 1;
 
       if (normalizedScroll > 1 || normalizedScroll < 0) {
-        imageContainerRef.current.style.position = 'absolute';
+        imageOuterContainerRef.current.style.position = 'absolute';
         return;
       }
 
-      imageContainerRef.current.style.position = 'fixed';
+      imageOuterContainerRef.current.style.position = 'fixed';
+
+      const imageContainers = imageInnerContainerRef.current.children;
+
+      let showingImage = -1;
+
+      for (let i = 0; i < imageContainers.length; i++) {
+        if (showingImage === -1) return;
+
+        const image = imageContainers[i];
+        image.classList.add(showingImage === i ? 'fade-in' : 'fade-out');
+        image.classList.remove(showingImage === i ? 'fade-out' : 'fade-in');
+      }
+
+      if (normalizedScroll > 0.24 && normalizedScroll < 0.45) {
+        const fromR = 255;
+        const fromG = 180;
+        const fromB = 46;
+
+        const toR = 199;
+        const toG = 229;
+        const toB = 209;
+
+        let progress = (normalizedScroll - 0.25) / 0.2;
+        let eased = (1 - Math.cos(progress * Math.PI)) / 2;
+
+        const r = Math.round(fromR + (toR - fromR) * eased);
+        const g = Math.round(fromG + (toG - fromG) * eased);
+        const b = Math.round(fromB + (toB - fromB) * eased);
+
+        let translateX = 55 - 45 * eased;
+        copyContainerRef.current.style.transform = `translateX(${translateX}vw)`;
+        sectionRef.current.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        return;
+      }
+
+      imageOuterContainerRef.current.style.right = 'auto';
+      imageOuterContainerRef.current.style.left = '10vw';
+
+      if (normalizedScroll > 0.6 && normalizedScroll < 0.8) {
+        const fromR = 199;
+        const fromG = 229;
+        const fromB = 209;
+
+        const toR = 0;
+        const toG = 71;
+        const toB = 64;
+
+        let progress = (normalizedScroll - 0.61) / 0.2;
+        let eased = (1 - Math.cos(progress * Math.PI)) / 2;
+
+        const r = Math.round(fromR + (toR - fromR) * eased);
+        const g = Math.round(fromG + (toG - fromG) * eased);
+        const b = Math.round(fromB + (toB - fromB) * eased);
+
+        let translateX = 10 + 45 * eased;
+        copyContainerRef.current.style.transform = `translateX(${translateX}vw)`;
+        sectionRef.current.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        return;
+      }
     };
 
     document.addEventListener('scroll', handleScroll);
@@ -37,12 +110,34 @@ const SectionTwo: React.FC = () => {
       className="section-two relative bg-yellow pt-[109px]"
       ref={sectionRef}
     >
-      <div className="absolute left-[10vw] top-[62px]" ref={imageContainerRef}>
-        <div className="relative lg:w-[36vw] 2xl:w-[762px]">
-          <ImageWithText text="By rail" image={imageFour} noWrap={true} />
+      <div
+        className="absolute left-[10vw] top-[62px]"
+        ref={imageOuterContainerRef}
+      >
+        <div
+          className="relative lg:w-[36vw] 2xl:w-[762px]"
+          ref={imageInnerContainerRef}
+        >
+          {/* <ImageWithText text="By rail" image={imageFour} noWrap={true} />
+          <ImageWithText
+            text="By rail"
+            image={imageSix}
+            noWrap={true}
+            hideByDefault={true}
+            animationDirection="left"
+          />
+          <ImageWithText
+            text="From up high"
+            image={imageTen}
+            noWrap={false}
+            hideByDefault={true}
+          /> */}
         </div>
       </div>
-      <div className="max-w-[692px] translate-x-[55vw] rounded-[30px] bg-white px-[96px] py-[104px]">
+      <div
+        className="max-w-[692px] translate-x-[55vw] rounded-[30px] bg-white px-[96px] py-[104px]"
+        ref={copyContainerRef}
+      >
         <p>
           Taiwan’s well-developed rail network is a convenient and enjoyable way
           to travel around the island. High-speed options, the metro (MRT) and
@@ -130,6 +225,59 @@ const SectionTwo: React.FC = () => {
           and glorious views of verdant forests, high-altitude peaks, and deep
           valleys.
         </p>
+        <MotionImage
+          src={imageSeven}
+          alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
+          className="mb-[30px] w-full rounded-[20px]"
+        />
+        <p>
+          Taiwan is a hiker’s paradise, with an extensive network of hiking
+          routes enticing every type of adventurer. Whether you’re after a
+          multi-day trek or a simple day hike, well-marked and accessible trails
+          make it a cinch to find yourself immersed in spectacular natural
+          surroundings.
+        </p>
+        <p>
+          Beautiful hikes are everywhere, like in Yangmingshan National Park
+          with its volcanic landscapes, hot springs, and views of Taipei city,
+          or in the nearby Ruifang District, where Teapot Mountain offers a
+          short but exhilarating hike with gorgeous mountain and coastline
+          views.
+        </p>
+        <p>
+          Or, immerse yourself in the history of the Qing Dynasty by embarking
+          on the Caoling Historic Trail. This route, often overlooked, commences
+          from Yuanwangken, sweeps across Andiajiao, passes through Fulung, and
+          finally reaches the jaw-dropping coastal reserve of Dali.
+        </p>
+        <MotionImage
+          src={imageEight}
+          alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
+          className="mb-[30px] w-full rounded-[20px]"
+        />
+        <p>
+          While the small-gauge train is famed in the Alishan National Scenic
+          Area, it’s also a top hiking destination. There’s a network of trails
+          through towering forests and to beautiful viewpoints, like the Giant
+          Tree Trail and Alishan Sunrise Trail.
+        </p>
+        <p>
+          For serious hikers, Yushan, Taiwan’s highest peak, offers a
+          challenging multi-day trek through diverse ecosystems like tropical
+          forests and alpine meadows, rewarding you with stunning views from the
+          summit.
+        </p>
+        <p>
+          Taiwan is packed full of wonder and contrasts. Combining rail, trail
+          and bike travel, this hiker’s paradise plugs you straight into the
+          heart of its captivating natural beauty, cultural heritage, and buzzy
+          modern cities.
+        </p>
+        <MotionImage
+          src={imageNine}
+          alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
+          className="w-full rounded-[20px]"
+        />
       </div>
     </section>
   );

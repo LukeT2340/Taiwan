@@ -11,7 +11,6 @@ import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
-import ColorMesh from './ColorMesh';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -26,14 +25,10 @@ const Hero: React.FC = () => {
         canvasContainerRef.current.style.display = 'none';
         return;
       }
-      canvasContainerRef.current.style.opacity = '1';
       canvasContainerRef.current.style.display = 'block';
 
-      if (normalizedScroll < 0.5) return;
-
       canvasContainerRef.current.style.opacity = (
-        1 -
-        (normalizedScroll - 0.5) / 0.5
+        1 - normalizedScroll
       ).toString();
     };
 
@@ -45,7 +40,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="hero z-10">
+    <section className="hero z-10 overflow-hidden">
       <div className="block-one relative z-10 h-screen w-screen bg-orange">
         <motion.div
           className="inset-0 z-10 h-full w-full lg:fixed"
@@ -63,21 +58,20 @@ const Hero: React.FC = () => {
             }}
           >
             <CameraController />
-            {/* <ColorMesh /> */}
 
             <ForegroundImage
               textureUrl="/assets/images/desktop/Front.png"
               position={[0, 0, -2]}
               size={[16, 9]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={6}
+              adjustsWithScrollFactor={10}
             />
             <ForegroundImage
-              textureUrl="/assets/images/desktop/Mid.png"
+              textureUrl="/assets/images/desktop/Mid-extended.png"
               position={[0, 0, -4]}
               size={[24, 13.5]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={3}
+              adjustsWithScrollFactor={4}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Back.png"
@@ -98,18 +92,18 @@ const Hero: React.FC = () => {
               position={[0, 0, -14]}
               size={[60, 33.75]}
             />
-            {/* 
-            <Clouds material={THREE.MeshBasicMaterial} position={[-2, 3, 1]}>
+
+            <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
               <Cloud
-                segments={45}
+                segments={85}
                 bounds={[8, 0, 5]}
-                volume={0.1}
+                volume={0.5}
                 color="white"
                 speed={0.3}
                 seed={19}
-                opacity={0.8}
+                opacity={0.2}
               />
-            </Clouds> */}
+            </Clouds>
 
             <HeroText />
 
@@ -127,7 +121,7 @@ const Hero: React.FC = () => {
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[85px] lg:pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
-          <div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
+          <motion.div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
             <CopyContainer>
               <p>
                 From Taipei’s shimmering skyscrapers and exciting food scene to
@@ -142,7 +136,7 @@ const Hero: React.FC = () => {
                 connects these from coast to coast.
               </p>
             </CopyContainer>
-          </div>
+          </motion.div>
           <CopyContainer>
             <MotionImage
               src={imageOne}
@@ -150,7 +144,7 @@ const Hero: React.FC = () => {
               className="w-full rounded-[30px] lg:w-auto"
             />
           </CopyContainer>
-          <div className="block-copy lg:mt-[190px] lg:max-w-[300px]">
+          <motion.div className="block-copy lg:mt-[190px] lg:max-w-[300px]">
             <CopyContainer>
               <p>
                 Stellar infrastructure means hiking through dramatic gorges,
@@ -162,7 +156,7 @@ const Hero: React.FC = () => {
                 island gem in ways few other destinations allow.
               </p>
             </CopyContainer>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
