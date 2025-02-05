@@ -19,16 +19,19 @@ const SectionTwo: React.FC = () => {
 
   useEffect(() => {
     let ticking = false;
+    let scrollTimeout: NodeJS.Timeout;
 
     const handleScroll = () => {
-      if (!ticking) {
+      if (ticking) return;
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
         requestAnimationFrame(() => {
           if (!sectionRef.current || !copyContainerRef.current) return;
 
           const sectionRect = sectionRef.current.getBoundingClientRect();
-
           const normScroll =
-            -sectionRect.top / (sectionRect.height - innerHeight);
+            -sectionRect.top / (sectionRect.height - window.innerHeight);
           setNormalizedScroll(normScroll);
 
           if (normScroll < 0.28) {
@@ -38,18 +41,17 @@ const SectionTwo: React.FC = () => {
           } else {
             setPart(2);
           }
-
           ticking = false;
         });
-
-        ticking = true;
-      }
+      }, 30);
+      ticking = true;
     };
 
     document.addEventListener('scroll', handleScroll);
 
     return () => {
       document.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }, []);
 

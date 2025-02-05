@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
@@ -14,16 +14,24 @@ import { CopyContainer, MotionImage } from '../../miscellaneous';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!canvasContainerRef.current || window.innerWidth < 1025) return;
+
       const scrollY = window.scrollY;
       const normalizedScroll = scrollY / window.innerHeight;
+
       if (normalizedScroll > 1) {
-        canvasContainerRef.current.style.position = 'relative';
+        // Hide the canvas
+        setIsVisible(false);
+        canvasContainerRef.current.style.position = 'absolute';
         return;
       }
+
+      // Show the canvas
+      setIsVisible(true);
       canvasContainerRef.current.style.position = 'fixed';
 
       canvasContainerRef.current.style.opacity = (
@@ -34,6 +42,7 @@ const Hero: React.FC = () => {
 
     document.addEventListener('scroll', handleScroll);
     handleScroll();
+
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
@@ -77,74 +86,76 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0, ease: 'easeOut' }}
         >
-          <Canvas
-            camera={{
-              position: [0, 0, 3],
-              fov: 70,
-              near: 1,
-              far: 17,
-            }}
-          >
-            <CameraController />
+          {isVisible && (
+            <Canvas
+              camera={{
+                position: [0, 0, 3],
+                fov: 70,
+                near: 1,
+                far: 17,
+              }}
+            >
+              <CameraController />
 
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Front.png"
-              position={[0, 0, -2]}
-              size={[16, 9]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={6}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Mid-extended.png"
-              position={[0, 0, -4]}
-              size={[24, 13.5]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={3}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Back.png"
-              position={[0, 0, -6]}
-              size={[28, 15.75]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={1}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Back-Silhouette.png"
-              position={[0, 0, -8]}
-              size={[34, 19.7]}
-              adjustWithScroll={false}
-              adjustsWithScrollFactor={24}
-            />
-            <Background
-              textureUrl="/assets/images/desktop/Sky.png"
-              position={[0, 0, -14]}
-              size={[60, 33.75]}
-            />
-
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
-              <Cloud
-                segments={85}
-                bounds={[8, 0, 5]}
-                volume={0.5}
-                color="white"
-                speed={0.3}
-                seed={19}
-                opacity={0.2}
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Front.png"
+                position={[0, 0, -2]}
+                size={[16, 9]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={6}
               />
-            </Clouds>
-
-            <HeroText />
-
-            <EffectComposer multisampling={0}>
-              <DepthOfField
-                focusDistance={0.11}
-                focalLength={0.1}
-                bokehScale={0.1}
-                height={220}
-                width={220}
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Mid-extended.png"
+                position={[0, 0, -4]}
+                size={[24, 13.5]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={3}
               />
-            </EffectComposer>
-          </Canvas>
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Back.png"
+                position={[0, 0, -6]}
+                size={[28, 15.75]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={1}
+              />
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Back-Silhouette.png"
+                position={[0, 0, -8]}
+                size={[34, 19.7]}
+                adjustWithScroll={false}
+                adjustsWithScrollFactor={24}
+              />
+              <Background
+                textureUrl="/assets/images/desktop/Sky.png"
+                position={[0, 0, -14]}
+                size={[60, 33.75]}
+              />
+
+              <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
+                <Cloud
+                  segments={85}
+                  bounds={[8, 0, 5]}
+                  volume={0.5}
+                  color="white"
+                  speed={0.3}
+                  seed={19}
+                  opacity={0.2}
+                />
+              </Clouds>
+
+              <HeroText />
+
+              <EffectComposer multisampling={0}>
+                <DepthOfField
+                  focusDistance={0.11}
+                  focalLength={0.1}
+                  bokehScale={0.1}
+                  height={220}
+                  width={220}
+                />
+              </EffectComposer>
+            </Canvas>
+          )}
         </motion.div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[60vh]">
