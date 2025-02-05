@@ -54,3 +54,29 @@
 .fade-out {
   animation: fadeOut 0.6s linear forwards;
 }
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(calc(50vw));
+  }
+  to {
+    transform: translateX(calc(50vw - 100%));
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(calc(50vw - 100%));
+  }
+  to {
+    transform: translateX(calc(50vw));
+  }
+}
+
+.slide-left {
+  animation: slideLeft 1.4s ease-in-out forwards;
+}
+
+.slide-right {
+  animation: slideRight 1.4s ease-in-out forwards;
+}

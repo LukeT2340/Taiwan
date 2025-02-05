@@ -40,9 +40,30 @@ export type MotionImageProps = {
   alt: string;
   'data-scroll'?: string;
   'data-scroll-speed'?: string;
-  initial?: { opacity?: number; scale?: number; x?: number; y?: number };
-  whileInView?: { opacity?: number; scale?: number; x?: number; y?: number };
-  animate?: { opacity?: number; scale?: number; x?: number; y?: number };
+  initial?: {
+    opacity?: number;
+    scale?: number;
+    x?: number;
+    y?: number;
+    rotate?: number;
+    clipPath?: string;
+  };
+  whileInView?: {
+    opacity?: number;
+    scale?: number;
+    x?: number;
+    y?: number;
+    rotate?: number;
+    clipPath?: string;
+  };
+  animate?: {
+    opacity?: number;
+    scale?: number;
+    x?: number;
+    y?: number;
+    rotate?: number;
+    clipPath?: string;
+  };
   transition?: { duration: number; delay: number; ease: string | number[] };
   viewport?: { once: boolean };
   className?: string;

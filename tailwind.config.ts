@@ -4,6 +4,7 @@ export default {
     extend: {
       screens: {
         lg: '1025px',
+        xl: '1600px',
         '2xl': '1800px',
       },
       colors: {
@@ -11,6 +12,8 @@ export default {
         'dark-blue': '#192958',
         orange: '#FF5629',
         yellow: '#FFB42E',
+        blue: '#C7E5D1',
+        'dark-green': '#004740',
       },
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
@@ -30,7 +33,7 @@ export default {
         custom: '1.5',
       },
       backgroundImage: {
-        footer: "url('/src/assets/images/desktop/image-1.jpg')",
+        footer: "url('/assets/images/desktop/footer-background.jpg')",
       },
     },
   },

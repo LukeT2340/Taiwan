@@ -2,7 +2,9 @@ import Header from './components/blocks/Header';
 import Footer from './components/blocks/Footer';
 import Hero from './components/blocks/Hero';
 import SectionTwo from './components/blocks/SectionTwo';
-// import SectionThree from './components/blocks/SectionThree';
+import SectionThree from './components/blocks/SectionThree';
+import SectionTwoMobile from './components/blocks/SectionTwoMobile';
+import SectionFour from './components/blocks/SectionFour';
 import SmoothScrolling from './js/smooth-scrolling';
 
 const App = () => {
@@ -14,8 +16,9 @@ const App = () => {
           <SmoothScrolling>
             <Hero />
             <SectionTwo />
-
-            {/* <SectionThree /> */}
+            <SectionTwoMobile />
+            <SectionThree />
+            <SectionFour />
           </SmoothScrolling>
         </article>
         <Footer />

@@ -18,6 +18,8 @@ function ForegroundImage({
   adjustsWithScrollFactor = 10,
 }: Props) {
   const [adjustedSize, setAdjustedSize] = useState<[number, number]>(size);
+  const [adjustedPosition, setAdjustedPosition] =
+    useState<[number, number, number]>(position);
   const texture = useLoader(TextureLoader, textureUrl);
 
   useFrame(() => {
@@ -31,10 +33,16 @@ function ForegroundImage({
       size[0] + normalizedScroll ** 1 * adjustsWithScrollFactor,
       size[1] + (9 / 16) * normalizedScroll ** 1 * adjustsWithScrollFactor,
     ]);
+
+    setAdjustedPosition([
+      position[0],
+      position[1] - normalizedScroll * adjustsWithScrollFactor * 0.05,
+      position[2],
+    ]);
   });
 
   return (
-    <mesh position={position}>
+    <mesh position={adjustedPosition}>
       <planeGeometry args={adjustedSize} />
       <meshBasicMaterial map={texture} transparent={true} side={2} />
     </mesh>

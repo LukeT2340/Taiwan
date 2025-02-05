@@ -1,8 +1,15 @@
+import Video from '../../miscellaneous/Video';
+
 const SectionThree: React.FC = () => (
-  <section className="section-three relative flex h-screen flex-col items-center justify-center bg-green-500">
-    <h2 className="text-center text-[2rem] leading-normal text-white lg:text-[5.4rem]">
-      headline
-    </h2>
+  <section className="section-three relative">
+    <div className="video-wrappe w-full">
+      <Video
+        scriptUrl="https://players.brightcove.net/6165065566001/wIpGq2Kd0p_default/index.min.js"
+        playerId="wIpGq2Kd0p"
+        videoId="6367050536112"
+        className="w-full"
+      />
+    </div>
   </section>
 );
 

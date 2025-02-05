@@ -72,38 +72,24 @@ export const ImageWithText = ({
   text,
   image,
   noWrap = false,
-  hideByDefault = false,
-  animationDirection = 'right',
 }: {
   text: string;
   image: string;
   noWrap?: boolean;
-  hideByDefault?: boolean;
-  animationDirection?: 'right' | 'left';
 }) => {
   return (
-    <div
-      className={`absolute inset-0 ${hideByDefault ? 'fade-out' : 'fade-in'}`}
-    >
-      <div className="relative">
+    <div className={`fixed right-[calc(50vw+40px)] top-[calc(50vw-670px)]`}>
+      <motion.div className="relative lg:w-[39vw] 2xl:w-[762px]">
         <MotionImage src={image} alt={text} className="relative w-full" />
         <motion.h3
-          className="absolute left-1/2 top-1/2 max-w-full -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-1/2 w-[400px] -translate-x-1/2 -translate-y-1/2 text-center"
           style={{
             textWrap: noWrap ? 'nowrap' : 'pretty',
           }}
-          initial={{
-            clipPath:
-              animationDirection === 'right'
-                ? 'inset(0 100% 0 0)'
-                : 'inset(0 0 0 100%)',
-          }}
-          whileInView={{ clipPath: 'inset(0 0% 0 0%)' }}
-          transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
         >
           {text}
         </motion.h3>
-      </div>
+      </motion.div>
     </div>
   );
 };

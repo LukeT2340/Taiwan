@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useMediaQuery } from 'react-responsive';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { Clouds, Cloud } from '@react-three/drei';
@@ -10,11 +9,11 @@ import Background from './Background';
 import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
+import heroMobile from '/assets/images/mobile/hero.jpg';
 import { CopyContainer, MotionImage } from '../../miscellaneous';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const wide = useMediaQuery({ minAspectRatio: '1.8' });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,37 +21,63 @@ const Hero: React.FC = () => {
       const scrollY = window.scrollY;
       const normalizedScroll = scrollY / window.innerHeight;
       if (normalizedScroll > 1) {
-        canvasContainerRef.current.style.display = 'none';
+        canvasContainerRef.current.style.position = 'relative';
         return;
       }
-      canvasContainerRef.current.style.display = 'block';
+      canvasContainerRef.current.style.position = 'fixed';
 
       canvasContainerRef.current.style.opacity = (
-        1 - normalizedScroll
+        1 -
+        (normalizedScroll - 0.5) / 0.5
       ).toString();
     };
 
     document.addEventListener('scroll', handleScroll);
-
+    handleScroll();
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <section className="hero z-10 overflow-hidden">
-      <div className="block-one relative z-10 h-screen w-screen bg-orange">
+    <section className="hero relative z-10 overflow-hidden">
+      <div className="relative py-[229px] md:py-[50vw] lg:hidden">
+        <MotionImage
+          src={heroMobile}
+          alt="Hero image"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="relative mx-auto max-w-[336px] md:max-w-[500px]">
+          <motion.h1
+            initial={{ x: -200, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
+          >
+            Travel through Taiwan
+          </motion.h1>
+          <div className="ml-5 lg:ml-10">
+            <motion.h2
+              initial={{ x: -300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
+            >
+              your way
+            </motion.h2>
+          </div>
+        </div>
+      </div>
+      <div className="block-one relative z-10 hidden h-[70vh] w-screen bg-orange lg:block">
         <motion.div
-          className="inset-0 z-10 h-full w-full lg:fixed"
+          className="inset-0 z-10 h-screen w-screen lg:fixed"
           ref={canvasContainerRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+          transition={{ duration: 1, delay: 0, ease: 'easeOut' }}
         >
           <Canvas
             camera={{
               position: [0, 0, 3],
-              fov: wide ? 70 : 79,
+              fov: 70,
               near: 1,
               far: 17,
             }}
@@ -64,14 +89,14 @@ const Hero: React.FC = () => {
               position={[0, 0, -2]}
               size={[16, 9]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={10}
+              adjustsWithScrollFactor={6}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Mid-extended.png"
               position={[0, 0, -4]}
               size={[24, 13.5]}
               adjustWithScroll={true}
-              adjustsWithScrollFactor={4}
+              adjustsWithScrollFactor={3}
             />
             <ForegroundImage
               textureUrl="/assets/images/desktop/Back.png"
@@ -119,7 +144,7 @@ const Hero: React.FC = () => {
           </Canvas>
         </motion.div>
       </div>
-      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:pt-[60vh]">
+      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[60vh]">
         <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
           <motion.div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
             <CopyContainer>

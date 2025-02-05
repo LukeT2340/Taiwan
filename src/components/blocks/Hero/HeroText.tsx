@@ -11,13 +11,13 @@ const HeroText = () => {
 
     const normalizedScroll = window.scrollY / window.innerHeight;
 
-    if (normalizedScroll > 1) return;
+    if (normalizedScroll > 2) return;
 
     textContainerRef.current.style.scale = (
       1 +
       normalizedScroll ** 1 * 1
     ).toString();
-    textContainerRef.current.style.transform = `translateY(${-10 * normalizedScroll}vh)`;
+    textContainerRef.current.style.transform = `translateY(${-5 * normalizedScroll}vh)`;
   });
 
   return (

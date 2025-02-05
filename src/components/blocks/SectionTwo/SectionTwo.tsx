@@ -1,100 +1,34 @@
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MotionImage } from '../../miscellaneous';
 import imageTwo from '/assets/images/desktop/2.jpg';
 import imageThree from '/assets/images/desktop/3.jpg';
-// import imageFour from '/assets/images/desktop/4.png';
 import imageFive from '/assets/images/desktop/5.jpg';
-// import imageSix from '/assets/images/desktop/6.png';
 import imageSeven from '/assets/images/desktop/7.jpg';
 import imageEight from '/assets/images/desktop/8.jpg';
 import imageNine from '/assets/images/desktop/9.jpg';
-// import imageTen from '/assets/images/desktop/10.png';
+import Images from './Images';
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageInnerContainerRef = useRef<HTMLDivElement>(null);
-  const imageOuterContainerRef = useRef<HTMLDivElement>(null);
   const copyContainerRef = useRef<HTMLDivElement>(null);
+  const [part, setPart] = useState<number>(0);
+  const [copyWidth, setCopyWidth] = useState<number | null>(null);
+  const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        !sectionRef.current ||
-        !imageOuterContainerRef.current ||
-        !imageInnerContainerRef.current ||
-        !copyContainerRef.current
-      )
-        return;
-
-      const sectionRect = sectionRef?.current?.getBoundingClientRect();
-
+      if (!sectionRef.current || !copyContainerRef.current) return;
+      const sectionRect = sectionRef.current.getBoundingClientRect();
       const normalizedScroll =
         (sectionRect.height - sectionRect.top) / sectionRect.height - 1;
 
-      if (normalizedScroll > 1 || normalizedScroll < 0) {
-        imageOuterContainerRef.current.style.position = 'absolute';
-        return;
-      }
-
-      imageOuterContainerRef.current.style.position = 'fixed';
-
-      const imageContainers = imageInnerContainerRef.current.children;
-
-      let showingImage = -1;
-
-      for (let i = 0; i < imageContainers.length; i++) {
-        if (showingImage === -1) return;
-
-        const image = imageContainers[i];
-        image.classList.add(showingImage === i ? 'fade-in' : 'fade-out');
-        image.classList.remove(showingImage === i ? 'fade-out' : 'fade-in');
-      }
-
-      if (normalizedScroll > 0.24 && normalizedScroll < 0.45) {
-        const fromR = 255;
-        const fromG = 180;
-        const fromB = 46;
-
-        const toR = 199;
-        const toG = 229;
-        const toB = 209;
-
-        let progress = (normalizedScroll - 0.25) / 0.2;
-        let eased = (1 - Math.cos(progress * Math.PI)) / 2;
-
-        const r = Math.round(fromR + (toR - fromR) * eased);
-        const g = Math.round(fromG + (toG - fromG) * eased);
-        const b = Math.round(fromB + (toB - fromB) * eased);
-
-        let translateX = 55 - 45 * eased;
-        copyContainerRef.current.style.transform = `translateX(${translateX}vw)`;
-        sectionRef.current.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-        return;
-      }
-
-      imageOuterContainerRef.current.style.right = 'auto';
-      imageOuterContainerRef.current.style.left = '10vw';
-
-      if (normalizedScroll > 0.6 && normalizedScroll < 0.8) {
-        const fromR = 199;
-        const fromG = 229;
-        const fromB = 209;
-
-        const toR = 0;
-        const toG = 71;
-        const toB = 64;
-
-        let progress = (normalizedScroll - 0.61) / 0.2;
-        let eased = (1 - Math.cos(progress * Math.PI)) / 2;
-
-        const r = Math.round(fromR + (toR - fromR) * eased);
-        const g = Math.round(fromG + (toG - fromG) * eased);
-        const b = Math.round(fromB + (toB - fromB) * eased);
-
-        let translateX = 10 + 45 * eased;
-        copyContainerRef.current.style.transform = `translateX(${translateX}vw)`;
-        sectionRef.current.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-        return;
+      if (normalizedScroll < 0.28) {
+        setPart(0);
+      } else if (normalizedScroll < 0.6) {
+        setPart(1);
+      } else {
+        setPart(2);
       }
     };
 
@@ -105,38 +39,43 @@ const SectionTwo: React.FC = () => {
     };
   }, []);
 
+  const handleResize = useCallback(() => {
+    if (!copyContainerRef.current) return;
+
+    setCopyWidth(copyContainerRef.current.getBoundingClientRect().width);
+    setInnerWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
+
   return (
-    <section
-      className="section-two relative bg-yellow pt-[109px]"
+    <motion.section
+      className="section-two relative z-0 hidden bg-yellow pb-[85px] pt-[109px] lg:block"
       ref={sectionRef}
+      animate={{
+        backgroundColor:
+          part === 0 ? '#FFB42E' : part === 1 ? '#C7E5D1' : '#004740',
+      }}
+      transition={{ duration: 0.6, delay: 0, ease: 'linear' }}
     >
-      <div
-        className="absolute left-[10vw] top-[62px]"
-        ref={imageOuterContainerRef}
-      >
-        <div
-          className="relative lg:w-[36vw] 2xl:w-[762px]"
-          ref={imageInnerContainerRef}
-        >
-          {/* <ImageWithText text="By rail" image={imageFour} noWrap={true} />
-          <ImageWithText
-            text="By rail"
-            image={imageSix}
-            noWrap={true}
-            hideByDefault={true}
-            animationDirection="left"
-          />
-          <ImageWithText
-            text="From up high"
-            image={imageTen}
-            noWrap={false}
-            hideByDefault={true}
-          /> */}
-        </div>
-      </div>
-      <div
-        className="max-w-[692px] translate-x-[55vw] rounded-[30px] bg-white px-[96px] py-[104px]"
+      <Images />
+      <motion.div
+        className={`rounded-[30px] bg-white py-[104px] lg:max-w-[520px] lg:px-[60px] xl:max-w-[692px] xl:px-[96px]`}
         ref={copyContainerRef}
+        animate={{
+          transform:
+            part === 1 && copyWidth
+              ? `translateX(${innerWidth / 2 - copyWidth - 80}px)`
+              : `translateX(${innerWidth / 2 + 80}px)`,
+        }}
+        transition={{ duration: 0.9, delay: 0, ease: 'easeInOut' }}
       >
         <p>
           Taiwan’s well-developed rail network is a convenient and enjoyable way
@@ -178,10 +117,16 @@ const SectionTwo: React.FC = () => {
           mass sky lantern releases during Lunar New Year, this is the line you
           need.
         </p>
+        <p>
+          In the cities, the MRT has been dubbed one of the best metro systems
+          in the world. For smaller towns and countryside, local rail connects
+          visitors with stops like Hualien or Tainan, the historic heart of
+          Taiwan.
+        </p>
         <MotionImage
           src={imageThree}
           alt="Taiwan’s well-developed rail network is a convenient and enjoyable way to travel around the island. High-speed options, the metro (MRT) and local routes offer unique glimpses into the island’s varied and stunning landscapes, big cities, and quieter rural towns."
-          className="mb-[30px] w-full rounded-[20px]"
+          className="mb-[250px] w-full rounded-[20px]"
         />
         <p>
           With gorgeous mountainous terrain – more than 260 peaks form the spine
@@ -228,7 +173,7 @@ const SectionTwo: React.FC = () => {
         <MotionImage
           src={imageSeven}
           alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
-          className="mb-[30px] w-full rounded-[20px]"
+          className="mb-[250px] w-full rounded-[20px]"
         />
         <p>
           Taiwan is a hiker’s paradise, with an extensive network of hiking
@@ -278,8 +223,8 @@ const SectionTwo: React.FC = () => {
           alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
           className="w-full rounded-[20px]"
         />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
