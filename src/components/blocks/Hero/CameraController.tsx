@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { lerp } from 'three/src/math/MathUtils.js';
 
