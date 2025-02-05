@@ -1,24 +1,32 @@
 import { Html } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const HeroText = () => {
   const textContainerRef = useRef<HTMLDivElement>(null);
 
-  useFrame(() => {
-    if (!textContainerRef.current || window.innerWidth < 1025) return;
+  useEffect(() => {
+    const useScroll = () => {
+      if (!textContainerRef.current || window.innerWidth < 1025) return;
 
-    const normalizedScroll = window.scrollY / window.innerHeight;
+      const normalizedScroll = window.scrollY / window.innerHeight;
 
-    if (normalizedScroll > 2) return;
+      if (normalizedScroll > 2) return;
 
-    textContainerRef.current.style.scale = (
-      1 +
-      normalizedScroll ** 1 * 1
-    ).toString();
-    textContainerRef.current.style.transform = `translateY(${-10 * normalizedScroll}vh)`;
-  });
+      textContainerRef.current.style.scale = (
+        1 +
+        normalizedScroll ** 1 * 1
+      ).toString();
+      textContainerRef.current.style.transform = `translateY(${-10 * normalizedScroll}vh)`;
+    };
+
+    document.addEventListener('scroll', useScroll);
+
+    return () => {
+      document.removeEventListener('scroll', useScroll);
+    };
+  }, []);
 
   return (
     <mesh position={[0, 0, 0]}>
