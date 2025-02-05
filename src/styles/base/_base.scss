@@ -110,5 +110,11 @@ body {
     line-height: 3.9rem;
     color: white;
     font-weight: bold;
+
+    @media (max-width: 1025px) {
+      text-align: start;
+      font-size: 1.3rem;
+      line-height: 3rem;
+    }
   }
 }
