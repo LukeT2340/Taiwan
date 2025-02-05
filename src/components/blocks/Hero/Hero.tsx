@@ -41,11 +41,14 @@ const Hero: React.FC = () => {
 
   return (
     <section className="hero relative z-10 overflow-hidden">
-      <div className="relative py-[229px] md:py-[50vw] lg:hidden">
+      <div className="relative overflow-hidden py-[229px] md:py-[50vw] lg:hidden">
         <MotionImage
           src={heroMobile}
           alt="Hero image"
           className="absolute inset-0 h-full w-full object-cover"
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
         />
         <div className="relative mx-auto max-w-[336px] md:max-w-[500px]">
           <motion.h1
