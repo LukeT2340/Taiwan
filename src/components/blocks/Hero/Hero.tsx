@@ -22,6 +22,7 @@ const Hero: React.FC = () => {
       const normalizedScroll = scrollY / window.innerHeight;
       if (normalizedScroll > 1) {
         canvasContainerRef.current.style.position = 'relative';
+        // canvasContainerRef.current.style.display = 'none';
         return;
       }
       canvasContainerRef.current.style.position = 'fixed';

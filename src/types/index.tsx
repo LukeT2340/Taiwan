@@ -47,6 +47,7 @@ export type MotionImageProps = {
     y?: number;
     rotate?: number;
     clipPath?: string;
+    filter?: string;
   };
   whileInView?: {
     opacity?: number;
@@ -55,6 +56,7 @@ export type MotionImageProps = {
     y?: number;
     rotate?: number;
     clipPath?: string;
+    filter?: string;
   };
   animate?: {
     opacity?: number;
@@ -63,6 +65,7 @@ export type MotionImageProps = {
     y?: number;
     rotate?: number;
     clipPath?: string;
+    filter?: string;
   };
   transition?: { duration: number; delay: number; ease: string | number[] };
   viewport?: { once: boolean };

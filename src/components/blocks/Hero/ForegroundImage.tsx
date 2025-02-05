@@ -36,7 +36,7 @@ function ForegroundImage({
 
     setAdjustedPosition([
       position[0],
-      position[1] - normalizedScroll * adjustsWithScrollFactor * 0.05,
+      position[1] - normalizedScroll * adjustsWithScrollFactor * 0,
       position[2],
     ]);
   });
