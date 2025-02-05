@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
@@ -14,31 +14,61 @@ import { CopyContainer, MotionImage } from '../../miscellaneous';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [frameloop, setFrameloop] = useState<'always' | 'never'>('always');
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
       if (!canvasContainerRef.current || window.innerWidth < 1025) return;
-      const scrollY = window.scrollY;
-      const normalizedScroll = scrollY / window.innerHeight;
-      if (normalizedScroll > 1) {
-        canvasContainerRef.current.style.position = 'relative';
-        // canvasContainerRef.current.style.display = 'none';
-        return;
-      }
-      canvasContainerRef.current.style.position = 'fixed';
 
-      canvasContainerRef.current.style.opacity = (
-        1 -
-        (normalizedScroll - 0.5) / 0.5
-      ).toString();
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const normalizedScroll = scrollY / window.innerHeight;
+
+          if (normalizedScroll > 1) {
+            canvasContainerRef.current!.style.position = 'relative';
+          } else {
+            canvasContainerRef.current!.style.position = 'fixed';
+            canvasContainerRef.current!.style.opacity = (
+              1 -
+              (normalizedScroll - 0.5) / 0.5
+            ).toString();
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     document.addEventListener('scroll', handleScroll);
     handleScroll();
+
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (canvasContainerRef.current) {
+      observer.observe(canvasContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    setFrameloop(isVisible ? 'always' : 'never'); // Stop rendering when off-screen
+  }, [isVisible]);
 
   return (
     <section className="hero relative z-10 overflow-hidden">
@@ -82,6 +112,7 @@ const Hero: React.FC = () => {
               near: 1,
               far: 17,
             }}
+            frameloop={frameloop}
           >
             <CameraController />
 

@@ -15,20 +15,34 @@ const SectionTwo: React.FC = () => {
   const [part, setPart] = useState<number>(0);
   const [copyWidth, setCopyWidth] = useState<number | null>(null);
   const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
+  const [normalizedScroll, setNormalizedScroll] = useState<number>(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current || !copyContainerRef.current) return;
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      const normalizedScroll =
-        (sectionRect.height - sectionRect.top) / sectionRect.height - 1;
+    let ticking = false;
 
-      if (normalizedScroll < 0.28) {
-        setPart(0);
-      } else if (normalizedScroll < 0.6) {
-        setPart(1);
-      } else {
-        setPart(2);
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (!sectionRef.current || !copyContainerRef.current) return;
+
+          const sectionRect = sectionRef.current.getBoundingClientRect();
+
+          const normScroll =
+            -sectionRect.top / (sectionRect.height - innerHeight);
+          setNormalizedScroll(normScroll);
+
+          if (normScroll < 0.28) {
+            setPart(0);
+          } else if (normScroll < 0.7) {
+            setPart(1);
+          } else {
+            setPart(2);
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
@@ -65,7 +79,7 @@ const SectionTwo: React.FC = () => {
       }}
       transition={{ duration: 0.6, delay: 0, ease: 'linear' }}
     >
-      <Images />
+      <Images normalizedScroll={normalizedScroll} />
       <motion.div
         className={`rounded-[30px] bg-white py-[104px] lg:max-w-[520px] lg:px-[60px] xl:max-w-[692px] xl:px-[96px]`}
         ref={copyContainerRef}

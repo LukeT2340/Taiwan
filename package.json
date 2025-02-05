@@ -20,6 +20,7 @@
     "include-media": "^2.0.0",
     "install": "^0.13.0",
     "locomotive-scroll": "^5.0.0-beta.11",
+    "lodash": "^4.17.21",
     "npm": "^10.2.3",
     "powered-immersive-header": "^0.0.17",
     "react": "^18.2.0",
@@ -31,6 +32,7 @@
     "typescript-eslint": "^0.0.1-alpha.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.15",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.0.11",
     "@types/three": "^0.172.0",
