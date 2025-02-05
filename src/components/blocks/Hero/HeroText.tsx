@@ -17,7 +17,7 @@ const HeroText = () => {
       1 +
       normalizedScroll ** 1 * 1
     ).toString();
-    textContainerRef.current.style.transform = `translateY(${-5 * normalizedScroll}vh)`;
+    textContainerRef.current.style.transform = `translateY(${-10 * normalizedScroll}vh)`;
   });
 
   return (

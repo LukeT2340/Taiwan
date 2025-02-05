@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
       </div>
       <div className="block-one relative z-10 hidden h-[70vh] w-screen bg-orange lg:block">
         <motion.div
-          className="inset-0 z-10 h-screen w-screen lg:fixed"
+          className="inset-0 z-10 h-screen w-screen"
           ref={canvasContainerRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

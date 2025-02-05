@@ -102,24 +102,16 @@ const Images: React.FC<Props> = ({ normalizedScroll }) => {
             src={imageFour}
             alt="By Rail"
             className="relative"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 0
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 0 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <MotionImage
             src={imageSix}
             alt="By Rail"
             className="absolute inset-0"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 1
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 1 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <motion.h3
@@ -162,24 +154,16 @@ const Images: React.FC<Props> = ({ normalizedScroll }) => {
             src={imageTwelve}
             alt="From up high"
             className="absolute inset-0"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 4
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 4 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <MotionImage
             src={imageThirteen}
             alt="From up high"
             className="absolute inset-0"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 5
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 5 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <motion.h3
@@ -202,24 +186,16 @@ const Images: React.FC<Props> = ({ normalizedScroll }) => {
             src={imageTen}
             alt="On two wheels"
             className="relative"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 2
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 2 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <MotionImage
             src={imageEleven}
             alt="On two wheels"
             className="absolute inset-0"
-            initial={{ opacity: 0, filter: 'blur(20px)' }}
-            animate={
-              showImage === 3
-                ? { opacity: 1, filter: 'blur(0px)' }
-                : { opacity: 0, filter: 'blur(20px)' }
-            }
+            initial={{ opacity: 0 }}
+            animate={showImage === 3 ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, ease: 'linear', delay: 0 }}
           />
           <MotionImage

@@ -205,7 +205,7 @@ const SectionTwoMobile = () => {
           <MotionImage
             src={imageEight}
             alt="Or, immerse yourself in the history of the Qing Dynasty by embarking on the Caoling Historic Trail. This route, often overlooked, commences from Yuanwangken, sweeps across Andiajiao, passes through Fulung, and finally reaches the jaw-dropping coastal reserve of Dali."
-            className="mb-[44px] rounded-[10px]"
+            className="mb-[44px] w-full rounded-[10px]"
           />
           <p>
             While the small-gauge train is famed in the Alishan National Scenic
