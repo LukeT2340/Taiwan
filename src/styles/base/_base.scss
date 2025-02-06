@@ -51,11 +51,16 @@ body {
   }
 
   h1 {
-    font-size: 9rem;
+    font-size: 15rem;
     font-family: 'Taiwan';
-    line-height: 9rem;
+    line-height: 15rem;
     text-transform: uppercase;
     color: white;
+
+    @media (max-width: 2200px) {
+      font-size: 9rem;
+      line-height: 9rem;
+    }
 
     @media (max-width: 600px) {
       font-size: 5.6rem;
@@ -64,10 +69,15 @@ body {
   }
 
   h2 {
-    font-size: 6.7rem;
+    font-size: 12rem;
     font-family: 'Taiwan';
-    line-height: 3rem;
+    line-height: 6rem;
     color: var(--theme-orange);
+
+    @media (max-width: 2200px) {
+      font-size: 6.7rem;
+      line-height: 3rem;
+    }
 
     @media (max-width: 600px) {
       font-size: 4.1rem;
@@ -116,5 +126,11 @@ body {
       font-size: 1.3rem;
       line-height: 3rem;
     }
+  }
+
+  .lg-reveal {
+    transition:
+      opacity 0.7s linear 0s,
+      transform 1s cubic-bezier(0.215, 0.61, 0.355, 1) 0s !important;
   }
 }

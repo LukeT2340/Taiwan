@@ -150,8 +150,8 @@ const Hero: React.FC = () => {
                   focusDistance={0.11}
                   focalLength={0.1}
                   bokehScale={0.1}
-                  height={220}
-                  width={220}
+                  height={120}
+                  width={120}
                 />
               </EffectComposer>
             </Canvas>
@@ -159,24 +159,26 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[60vh]">
-        <div className="flex flex-col items-center justify-center gap-[54px] text-white lg:flex-row lg:gap-[65px] lg:px-[30px]">
+        <div
+          className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[65px]"
+          data-lg-reveal="fade-to-top"
+          data-lg-reveal-stagger="0.25"
+        >
           <motion.div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
-            <CopyContainer>
-              <p>
-                From Taipei’s shimmering skyscrapers and exciting food scene to
-                the misty mountains of the Central Range, Taiwan packs the best
-                of Asia into an island roughly half the size of Tasmania.
-              </p>
-              <p>
-                Majestic mountain ranges are a striking backdrop to stunning
-                coastlines, and traditional cultural heritage weaves through
-                modern cities with cutting-edge tech. Taiwan is a country of
-                exhilarating contrasts, but what really sets it apart is how it
-                connects these from coast to coast.
-              </p>
-            </CopyContainer>
+            <p>
+              From Taipei’s shimmering skyscrapers and exciting food scene to
+              the misty mountains of the Central Range, Taiwan packs the best of
+              Asia into an island roughly half the size of Tasmania.
+            </p>
+            <p>
+              Majestic mountain ranges are a striking backdrop to stunning
+              coastlines, and traditional cultural heritage weaves through
+              modern cities with cutting-edge tech. Taiwan is a country of
+              exhilarating contrasts, but what really sets it apart is how it
+              connects these from coast to coast.
+            </p>
           </motion.div>
-          <div className="px-[30px] md:w-[600px] md:px-0">
+          <div className="md:w-[600px]">
             <MotionImage
               src={imageOne}
               alt="From Taipei’s shimmering skyscrapers and exciting food scene to the misty mountains of the Central Range, Taiwan packs the best of Asia into an island roughly half the size of Tasmania."
@@ -184,17 +186,15 @@ const Hero: React.FC = () => {
             />
           </div>
           <motion.div className="block-copy lg:mt-[190px] lg:max-w-[300px]">
-            <CopyContainer>
-              <p>
-                Stellar infrastructure means hiking through dramatic gorges,
-                cycling along scenic coastlines or criss-crossing the island by
-                high-speed train with ease. Many towns and cities are near major
-                hiking trails, and the impressive web of bike paths and train
-                stations allows you to effortlessly mix and match these
-                transport modes, giving you the freedom to experience this
-                island gem in ways few other destinations allow.
-              </p>
-            </CopyContainer>
+            <p>
+              Stellar infrastructure means hiking through dramatic gorges,
+              cycling along scenic coastlines or criss-crossing the island by
+              high-speed train with ease. Many towns and cities are near major
+              hiking trails, and the impressive web of bike paths and train
+              stations allows you to effortlessly mix and match these transport
+              modes, giving you the freedom to experience this island gem in
+              ways few other destinations allow.
+            </p>
           </motion.div>
         </div>
       </div>

@@ -32,7 +32,7 @@ const HeroText = () => {
     <mesh position={[0, 0, 0]}>
       <Html className="pointer-events-none" center={true} zIndexRange={[0, 10]}>
         <motion.div
-          className="mx-auto max-w-[541px] font-taiwan"
+          className="3xl:max-w-[800px] mx-auto max-w-[541px] font-taiwan"
           ref={textContainerRef}
         >
           <motion.h1

@@ -27,8 +27,8 @@ function CameraController() {
 
     const mouseX = state.pointer.x;
     const mouseY = state.pointer.y;
-    targetX = lerp(cameraRef.current.position.x, mouseX * 0.4, 0.015);
-    targetY = lerp(cameraRef.current.position.y, mouseY * 0.4, 0.015);
+    targetX = lerp(cameraRef.current.position.x, mouseX * 0.5, 0.01);
+    targetY = lerp(cameraRef.current.position.y, mouseY * 0.5, 0.01);
 
     cameraRef.current.position.x = targetX;
     cameraRef.current.position.y = targetY;

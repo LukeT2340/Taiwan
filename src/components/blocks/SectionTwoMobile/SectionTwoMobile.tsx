@@ -1,4 +1,4 @@
-import { MotionImage } from '../../miscellaneous';
+import { CopyContainer, MotionImage } from '../../miscellaneous';
 import imageTwo from '/assets/images/desktop/2.jpg';
 import imageThree from '/assets/images/desktop/3.jpg';
 import imageFour from '/assets/images/desktop/4.png';
@@ -32,8 +32,8 @@ const SectionTwoMobile = () => {
           className="absolute bottom-0 left-[calc(50%-12vw)] w-[35vw] -translate-y-[8vw] md:left-[calc(50%-8vw)] md:w-[23vw] md:-translate-y-[4vw]"
         />
       </div>
-      <div className="mx-[30px] my-[54px]">
-        <div className="mx-auto max-w-[600px]">
+      <div className="my-[54px]">
+        <CopyContainer>
           <p>
             Taiwan’s well-developed rail network is a convenient and enjoyable
             way to travel around the island. High-speed options, the metro (MRT)
@@ -86,7 +86,7 @@ const SectionTwoMobile = () => {
             alt="Taiwan’s well-developed rail network is a convenient and enjoyable way to travel around the island. High-speed options, the metro (MRT) and local routes offer unique glimpses into the island’s varied and stunning landscapes, big cities, and quieter rural towns."
             className="w-full rounded-[20px]"
           />
-        </div>
+        </CopyContainer>
       </div>
       <div className="bg-blue relative px-[15px] pb-[52px] pt-[33px]">
         <MotionImage
@@ -108,8 +108,8 @@ const SectionTwoMobile = () => {
         alt="With gorgeous mountainous terrain – more than 260 peaks form the spine of the island – it’s no surprise that two of the world’s most well-known bike companies, Giant and Merida, began in Taiwan in 1972. In fact, Taiwanese people are passionate cyclists, and Taiwan is one of the only places in the world with bike lanes that extend throughout the country. "
         className="w-full"
       />
-      <div className="mx-[30px] my-[54px]">
-        <div className="mx-auto max-w-[600px]">
+      <div className="my-[54px]">
+        <CopyContainer>
           <p>
             With gorgeous mountainous terrain – more than 260 peaks form the
             spine of the island – it’s no surprise that two of the world’s most
@@ -157,7 +157,7 @@ const SectionTwoMobile = () => {
             alt="On the lesser-explored east coast, the beautiful 300-kilometre East Coast Route connects Hualien in the north to Taitung in the south with breathtaking views of the Pacific Ocean."
             className="w-full rounded-[10px]"
           />
-        </div>
+        </CopyContainer>
       </div>
       <div className="bg-dark-green relative px-[15px] pb-[52px] pt-[33px]">
         <MotionImage
@@ -179,8 +179,8 @@ const SectionTwoMobile = () => {
         alt="Taiwan is a hiker’s paradise, with an extensive network of hiking routes enticing every type of adventurer. Whether you’re after a multi-day trek or a simple day hike, well-marked and accessible trails make it a cinch to find yourself immersed in spectacular natural surroundings."
         className="w-full"
       />
-      <div className="mx-[30px] my-[54px]">
-        <div className="mx-auto max-w-[600px]">
+      <div className="my-[54px]">
+        <CopyContainer>
           <p>
             Taiwan is a hiker’s paradise, with an extensive network of hiking
             routes enticing every type of adventurer. Whether you’re after a
@@ -230,7 +230,7 @@ const SectionTwoMobile = () => {
             alt="Taiwan is packed full of wonder and contrasts. Combining rail, trail and bike travel, this hiker’s paradise plugs you straight into the heart of its captivating natural beauty, cultural heritage, and buzzy modern cities. "
             className="w-full rounded-[10px]"
           />
-        </div>
+        </CopyContainer>
       </div>
     </section>
   );

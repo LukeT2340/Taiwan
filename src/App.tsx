@@ -1,3 +1,6 @@
+// @ts-nocheck
+import { useEffect } from 'react';
+import luge from '@waaark/luge';
 import Header from './components/blocks/Header';
 import Footer from './components/blocks/Footer';
 import Hero from './components/blocks/Hero';
@@ -8,6 +11,10 @@ import SectionFour from './components/blocks/SectionFour';
 import SmoothScrolling from './js/smooth-scrolling';
 
 const App = () => {
+  useEffect(() => {
+    luge.lifecycle.refresh();
+  }, []);
+
   return (
     <div>
       <main>
