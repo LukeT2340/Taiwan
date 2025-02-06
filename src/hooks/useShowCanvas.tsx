@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { useEffect, useState } from 'react';
 
-const useShowCanvas: boolean = () => {
+const useShowCanvas = () => {
   const [showCanvas, setShowCanvas] = useState<boolean>(false);
 
   useEffect(() => {
@@ -14,16 +14,16 @@ const useShowCanvas: boolean = () => {
         THREE.WebGLRenderer && new THREE.WebGLRenderer().capabilities.isWebGL2;
       const cpuCores = navigator.hardwareConcurrency || 2;
       const ram = navigator.deviceMemory || 2;
-      const isSafari = /^((?!chrome|android).)*safari/i.test(
-        navigator.userAgent
-      );
+      // const isSafari = /^((?!chrome|android).)*safari/i.test(
+      //   navigator.userAgent
+      // );
       const isDesktop = window.innerWidth > 1025;
 
       let meetsRequirements =
         cpuCores >= minCpuCores &&
         ram >= minRam &&
         supportsWebGL &&
-        !isSafari &&
+        // !isSafari &&
         isDesktop;
 
       setShowCanvas(meetsRequirements);

@@ -11,6 +11,11 @@ import imageOne from '/assets/images/desktop/1.jpg';
 import heroMobile from '/assets/images/desktop/hero-entire.jpg';
 import { MotionImage } from '../../miscellaneous';
 import useShowCanvas from '../../../hooks/useShowCanvas';
+import front from '/assets/images/desktop/Front.png';
+import mid from '/assets/images/desktop/Mid-extended.png';
+import back from '/assets/images/desktop/Back.png';
+import silhouette from '/assets/images/desktop/Back-Silhouette.png';
+import sky from '/assets/images/desktop/Sky.png';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -96,35 +101,35 @@ const Hero: React.FC = () => {
               <CameraController />
 
               <ForegroundImage
-                textureUrl="/assets/images/desktop/Front.png"
+                textureUrl={front}
                 position={[0, 0, -2]}
                 size={[16, 9]}
                 adjustWithScroll={true}
                 adjustsWithScrollFactor={6}
               />
               <ForegroundImage
-                textureUrl="/assets/images/desktop/Mid-extended.png"
+                textureUrl={mid}
                 position={[0, 0, -4]}
                 size={[24, 13.5]}
                 adjustWithScroll={true}
                 adjustsWithScrollFactor={3}
               />
               <ForegroundImage
-                textureUrl="/assets/images/desktop/Back.png"
+                textureUrl={back}
                 position={[0, 0, -6]}
                 size={[28, 15.75]}
                 adjustWithScroll={true}
                 adjustsWithScrollFactor={1}
               />
               <ForegroundImage
-                textureUrl="/assets/images/desktop/Back-Silhouette.png"
+                textureUrl={silhouette}
                 position={[0, 0, -8]}
                 size={[34, 19.7]}
                 adjustWithScroll={false}
                 adjustsWithScrollFactor={24}
               />
               <ForegroundImage
-                textureUrl="/assets/images/desktop/Sky.png"
+                textureUrl={sky}
                 position={[0, 0, -14]}
                 size={[60, 33.75]}
                 adjustWithScroll={false}
