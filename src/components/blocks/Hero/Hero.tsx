@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="block-one relative z-10 h-[160vh] w-screen bg-orange">
+        <div className="block-one relative z-10 h-[145vh] w-screen bg-orange">
           <motion.div
             className="inset-0 z-10 h-screen w-screen"
             ref={canvasContainerRef}
@@ -163,7 +163,7 @@ const Hero: React.FC = () => {
         </div>
       )}
       <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[76px]">
-        <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[65px]">
+        <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[40px] 2xl:gap-[65px]">
           <motion.div className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]">
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
@@ -182,7 +182,7 @@ const Hero: React.FC = () => {
             <MotionImage
               src={imageOne}
               alt="From Taipei’s shimmering skyscrapers and exciting food scene to the misty mountains of the Central Range, Taiwan packs the best of Asia into an island roughly half the size of Tasmania."
-              className="w-full rounded-[30px] md:rounded-[40px] lg:w-auto lg:rounded-[30px]"
+              className="w-full rounded-[30px] md:rounded-[40px] lg:max-w-[550px] lg:rounded-[30px]"
             />
           </div>
           <motion.div className="block-copy md:max-w-[600px] lg:mt-[190px] lg:max-w-[300px]">

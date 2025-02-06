@@ -14,17 +14,10 @@ const useShowCanvas = () => {
         THREE.WebGLRenderer && new THREE.WebGLRenderer().capabilities.isWebGL2;
       const cpuCores = navigator.hardwareConcurrency || 2;
       const ram = navigator.deviceMemory || 2;
-      // const isSafari = /^((?!chrome|android).)*safari/i.test(
-      //   navigator.userAgent
-      // );
       const isDesktop = window.innerWidth > 1025;
 
       let meetsRequirements =
-        cpuCores >= minCpuCores &&
-        ram >= minRam &&
-        supportsWebGL &&
-        // !isSafari &&
-        isDesktop;
+        cpuCores >= minCpuCores && ram >= minRam && supportsWebGL && isDesktop;
 
       setShowCanvas(meetsRequirements);
     };
