@@ -43,7 +43,7 @@ const SectionTwo: React.FC = () => {
           }
           ticking = false;
         });
-      }, 30);
+      }, 20);
       ticking = true;
     };
 

@@ -12,13 +12,13 @@ function CameraController() {
     endZ: 3,
   };
 
-  useFrame((state, _) => {
+  useFrame((state, delta) => {
     if (!cameraRef.current) {
       cameraRef.current = state.camera;
       cameraRef.current.position.z = zAnimation.startZ;
     }
 
-    timeRef.current += state.clock.elapsedTime;
+    timeRef.current += delta;
     const progress = Math.min(timeRef.current / zAnimation.duration, 1);
     const eased = 1 - Math.pow(1 - progress, 2);
 
