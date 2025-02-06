@@ -3,6 +3,7 @@ import imageTwo from '/assets/images/desktop/2.jpg';
 import imageThree from '/assets/images/desktop/3.jpg';
 import imageFour from '/assets/images/desktop/4.png';
 import imageFive from '/assets/images/desktop/5.jpg';
+import imageSix from '/assets/images/mobile/6.jpg';
 import imageSeven from '/assets/images/desktop/7.jpg';
 import imageEight from '/assets/images/desktop/8.jpg';
 import imageNine from '/assets/images/desktop/9.jpg';
@@ -32,6 +33,11 @@ const SectionTwoMobile = () => {
           className="absolute bottom-0 left-[calc(50%-12vw)] w-[35vw] -translate-y-[8vw] md:left-[calc(50%-8vw)] md:w-[23vw] md:-translate-y-[4vw]"
         />
       </div>
+      <MotionImage
+        src={imageSix}
+        alt="Taiwan’s well-developed rail network is a convenient and enjoyable way to travel around the island. High-speed options, the metro (MRT) and local routes offer unique glimpses into the island’s varied and stunning landscapes, big cities, and quieter rural towns. "
+        className="w-full"
+      />
       <div className="my-[54px]">
         <CopyContainer>
           <p>

@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="block-one relative z-10 h-[130vh] w-screen bg-orange">
+        <div className="block-one relative z-10 h-[160vh] w-screen bg-orange">
           <motion.div
             className="inset-0 z-10 h-screen w-screen"
             ref={canvasContainerRef}

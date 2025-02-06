@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { useEffect, useState } from 'react';
 
-const useShowCanvas = () => {
+const useShowCanvas: boolean = () => {
   const [showCanvas, setShowCanvas] = useState<boolean>(false);
 
   useEffect(() => {
