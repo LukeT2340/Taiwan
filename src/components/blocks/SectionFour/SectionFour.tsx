@@ -5,7 +5,7 @@ import home from '/assets/images/common/home-icon.svg';
 
 const SectionFour = () => {
   return (
-    <section className="relative bg-footer bg-cover bg-[-435px_0px] bg-no-repeat pb-[350px] pt-[75px] md:bg-[-40vw_0] md:pb-[400px] lg:bg-center lg:pb-[490px] lg:pt-[158px]">
+    <section className="3xl:pb-[750px] 3xl:pt-[200px] relative bg-footer bg-cover bg-[-435px_0px] bg-no-repeat pb-[350px] pt-[75px] md:bg-[-40vw_0] md:pb-[400px] lg:bg-center lg:pb-[490px] lg:pt-[158px]">
       <div className="mx-[40px] flex flex-col items-start justify-center gap-[43px] md:mx-auto md:max-w-[387px] lg:max-w-full lg:flex-row lg:items-center">
         <div className="max-w-[387px]">
           <h4>
@@ -15,7 +15,7 @@ const SectionFour = () => {
         </div>
         <div>
           <CustomLink
-            href="#"
+            href="https://www.instagram.com/taiwan_tourism_aunz/"
             className="mb-[20px] flex items-center justify-start gap-[16px]"
           >
             <div className="w-[30px]">
@@ -28,7 +28,7 @@ const SectionFour = () => {
             <h5>@Taiwan_Tourism_AUNZ</h5>
           </CustomLink>
           <CustomLink
-            href="#"
+            href="https://www.facebook.com/TaiwanTourismANZ/"
             className="mb-[20px] flex items-center justify-start gap-[16px]"
           >
             <div className="w-[30px]">
@@ -41,7 +41,7 @@ const SectionFour = () => {
             <h5>@TaiwanTourismANZ</h5>
           </CustomLink>
           <CustomLink
-            href="#"
+            href="https://eng.taiwan.net.tw/"
             className="flex items-center justify-start gap-[16px]"
           >
             <div className="w-[30px]">

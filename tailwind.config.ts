@@ -6,6 +6,7 @@ export default {
         lg: '1025px',
         xl: '1600px',
         '2xl': '1800px',
+        '3xl': '2200px',
       },
       colors: {
         'bright-cyan': '#58F6F4',

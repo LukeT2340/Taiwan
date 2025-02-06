@@ -25,13 +25,13 @@ const Hero: React.FC = () => {
 
       if (normalizedScroll > 1) {
         // Hide the canvas
-        setIsVisible(false);
+        // setIsVisible(false);
         canvasContainerRef.current.style.position = 'absolute';
         return;
       }
 
       // Show the canvas
-      setIsVisible(true);
+      // setIsVisible(true);
       canvasContainerRef.current.style.position = 'fixed';
 
       canvasContainerRef.current.style.opacity = (
@@ -176,13 +176,13 @@ const Hero: React.FC = () => {
               </p>
             </CopyContainer>
           </motion.div>
-          <CopyContainer>
+          <div className="px-[30px] md:w-[600px] md:px-0">
             <MotionImage
               src={imageOne}
               alt="From Taipei’s shimmering skyscrapers and exciting food scene to the misty mountains of the Central Range, Taiwan packs the best of Asia into an island roughly half the size of Tasmania."
-              className="w-full rounded-[30px] lg:w-auto"
+              className="w-full rounded-[30px] md:rounded-[40px] lg:w-auto lg:rounded-[30px]"
             />
-          </CopyContainer>
+          </div>
           <motion.div className="block-copy lg:mt-[190px] lg:max-w-[300px]">
             <CopyContainer>
               <p>
