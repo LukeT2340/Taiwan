@@ -62,11 +62,7 @@ export const Inner: React.FC<PropsWithChildren> = ({ children }) => (
 
 export const CopyContainer: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div
-      className="lg:max-w-auto mx-[30px] w-fit md:mx-auto md:max-w-[600px] lg:mx-0"
-      data-lg-reveal="fade-to-top"
-      data-lg-reveal-stagger="0.25"
-    >
+    <div className="lg:max-w-auto mx-[30px] w-fit md:mx-auto md:max-w-[600px] lg:mx-0">
       {children}
     </div>
   );

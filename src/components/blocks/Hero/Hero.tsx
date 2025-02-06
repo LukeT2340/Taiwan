@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
@@ -10,11 +10,10 @@ import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import heroMobile from '/assets/images/mobile/hero.jpg';
-import { CopyContainer, MotionImage } from '../../miscellaneous';
+import { MotionImage } from '../../miscellaneous';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,14 +23,10 @@ const Hero: React.FC = () => {
       const normalizedScroll = scrollY / window.innerHeight;
 
       if (normalizedScroll > 1) {
-        // Hide the canvas
-        // setIsVisible(false);
         canvasContainerRef.current.style.position = 'absolute';
         return;
       }
 
-      // Show the canvas
-      // setIsVisible(true);
       canvasContainerRef.current.style.position = 'fixed';
 
       canvasContainerRef.current.style.opacity = (
@@ -86,84 +81,78 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0, ease: 'easeOut' }}
         >
-          {isVisible && (
-            <Canvas
-              camera={{
-                position: [0, 0, 3],
-                fov: 70,
-                near: 1,
-                far: 17,
-              }}
-            >
-              <CameraController />
+          <Canvas
+            camera={{
+              position: [0, 0, 3],
+              fov: 70,
+              near: 1,
+              far: 17,
+            }}
+          >
+            <CameraController />
 
-              <ForegroundImage
-                textureUrl="/assets/images/desktop/Front.png"
-                position={[0, 0, -2]}
-                size={[16, 9]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={6}
-              />
-              <ForegroundImage
-                textureUrl="/assets/images/desktop/Mid-extended.png"
-                position={[0, 0, -4]}
-                size={[24, 13.5]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={3}
-              />
-              <ForegroundImage
-                textureUrl="/assets/images/desktop/Back.png"
-                position={[0, 0, -6]}
-                size={[28, 15.75]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={1}
-              />
-              <ForegroundImage
-                textureUrl="/assets/images/desktop/Back-Silhouette.png"
-                position={[0, 0, -8]}
-                size={[34, 19.7]}
-                adjustWithScroll={false}
-                adjustsWithScrollFactor={24}
-              />
-              <Background
-                textureUrl="/assets/images/desktop/Sky.png"
-                position={[0, 0, -14]}
-                size={[60, 33.75]}
-              />
+            <ForegroundImage
+              textureUrl="/assets/images/desktop/Front.png"
+              position={[0, 0, -2]}
+              size={[16, 9]}
+              adjustWithScroll={true}
+              adjustsWithScrollFactor={6}
+            />
+            <ForegroundImage
+              textureUrl="/assets/images/desktop/Mid-extended.png"
+              position={[0, 0, -4]}
+              size={[24, 13.5]}
+              adjustWithScroll={true}
+              adjustsWithScrollFactor={3}
+            />
+            <ForegroundImage
+              textureUrl="/assets/images/desktop/Back.png"
+              position={[0, 0, -6]}
+              size={[28, 15.75]}
+              adjustWithScroll={true}
+              adjustsWithScrollFactor={1}
+            />
+            <ForegroundImage
+              textureUrl="/assets/images/desktop/Back-Silhouette.png"
+              position={[0, 0, -8]}
+              size={[34, 19.7]}
+              adjustWithScroll={false}
+              adjustsWithScrollFactor={24}
+            />
+            <Background
+              textureUrl="/assets/images/desktop/Sky.png"
+              position={[0, 0, -14]}
+              size={[60, 33.75]}
+            />
 
-              <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
-                <Cloud
-                  segments={85}
-                  bounds={[8, 0, 5]}
-                  volume={0.5}
-                  color="white"
-                  speed={0.3}
-                  seed={19}
-                  opacity={0.2}
-                />
-              </Clouds>
+            <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
+              <Cloud
+                segments={85}
+                bounds={[8, 0, 5]}
+                volume={0.5}
+                color="white"
+                speed={0.3}
+                seed={19}
+                opacity={0.2}
+              />
+            </Clouds>
 
-              <HeroText />
+            <HeroText />
 
-              <EffectComposer multisampling={0}>
-                <DepthOfField
-                  focusDistance={0.11}
-                  focalLength={0.1}
-                  bokehScale={0.1}
-                  height={120}
-                  width={120}
-                />
-              </EffectComposer>
-            </Canvas>
-          )}
+            <EffectComposer multisampling={0}>
+              <DepthOfField
+                focusDistance={0.11}
+                focalLength={0.1}
+                bokehScale={0.1}
+                height={120}
+                width={120}
+              />
+            </EffectComposer>
+          </Canvas>
         </motion.div>
       </div>
       <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[60vh]">
-        <div
-          className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[65px]"
-          data-lg-reveal="fade-to-top"
-          data-lg-reveal-stagger="0.25"
-        >
+        <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[65px]">
           <motion.div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
