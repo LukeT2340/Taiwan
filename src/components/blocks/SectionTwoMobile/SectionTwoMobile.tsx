@@ -21,7 +21,7 @@ const SectionTwoMobile = () => {
         <MotionImage
           src={imageFour}
           alt="By rail"
-          className="mx-auto md:max-w-[800px]"
+          className="mx-auto md:max-w-[700px]"
         />
         <h3 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           By rail
@@ -92,7 +92,7 @@ const SectionTwoMobile = () => {
         <MotionImage
           src={imageTen}
           alt="On two wheels"
-          className="mx-auto md:max-w-[800px]"
+          className="mx-auto md:max-w-[700px]"
         />
         <h3 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
           On two wheels
@@ -163,7 +163,7 @@ const SectionTwoMobile = () => {
         <MotionImage
           src={imageTwelve}
           alt="From up high"
-          className="mx-auto md:max-w-[800px]"
+          className="mx-auto md:max-w-[700px]"
         />
         <h3 className="absolute left-1/2 top-1/2 w-[200px] -translate-x-1/2 -translate-y-1/2 text-center md:w-[300px]">
           From up high

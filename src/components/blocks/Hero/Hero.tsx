@@ -5,19 +5,22 @@ import * as THREE from 'three';
 import { Clouds, Cloud } from '@react-three/drei';
 import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
 import CameraController from './CameraController';
-import Background from './Background';
 import ForegroundImage from './ForegroundImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
-import heroMobile from '/assets/images/mobile/hero.jpg';
+import heroMobile from '/assets/images/desktop/hero-entire.jpg';
 import { MotionImage } from '../../miscellaneous';
+import useShowCanvas from '../../../hooks/useShowCanvas';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const showCanvas = useShowCanvas();
 
   useEffect(() => {
+    if (!showCanvas) return;
+
     const handleScroll = () => {
-      if (!canvasContainerRef.current || window.innerWidth < 1025) return;
+      if (!canvasContainerRef.current) return;
 
       const scrollY = window.scrollY;
       const normalizedScroll = scrollY / window.innerHeight;
@@ -28,7 +31,6 @@ const Hero: React.FC = () => {
       }
 
       canvasContainerRef.current.style.position = 'fixed';
-
       canvasContainerRef.current.style.opacity = (
         1 -
         (normalizedScroll - 0.5) / 0.5
@@ -41,119 +43,123 @@ const Hero: React.FC = () => {
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [showCanvas]);
 
   return (
     <section className="hero relative z-10 overflow-hidden">
-      <div className="relative overflow-hidden py-[229px] md:py-[50vw] lg:hidden">
-        <MotionImage
-          src={heroMobile}
-          alt="Hero image"
-          className="absolute inset-0 h-full w-full object-cover"
-          initial={{ scale: 1.2 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
-        />
-        <div className="relative mx-auto max-w-[336px] md:max-w-[500px]">
-          <motion.h1
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+      {!showCanvas ? (
+        <div className="relative overflow-hidden py-[229px] md:py-[50vw] lg:flex lg:h-screen lg:w-screen lg:items-center lg:justify-center lg:py-0">
+          <MotionImage
+            src={heroMobile}
+            alt="Hero image"
+            className="absolute inset-0 h-full w-full object-cover"
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
-          >
-            Travel through Taiwan
-          </motion.h1>
-          <div className="ml-5 lg:ml-10">
-            <motion.h2
-              initial={{ x: -300, opacity: 0 }}
+          />
+          <div className="relative mx-auto max-w-[336px] md:max-w-[500px]">
+            <motion.h1
+              initial={{ x: -200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
             >
-              your way
-            </motion.h2>
+              Travel through Taiwan
+            </motion.h1>
+            <div className="ml-5 lg:ml-10">
+              <motion.h2
+                initial={{ x: -300, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
+              >
+                your way
+              </motion.h2>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="block-one relative z-10 hidden h-[70vh] w-screen bg-orange lg:block">
-        <motion.div
-          className="inset-0 z-10 h-screen w-screen"
-          ref={canvasContainerRef}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0, ease: 'easeOut' }}
-        >
-          <Canvas
-            camera={{
-              position: [0, 0, 3],
-              fov: 70,
-              near: 1,
-              far: 17,
-            }}
+      ) : (
+        <div className="block-one relative z-10 h-[130vh] w-screen bg-orange">
+          <motion.div
+            className="inset-0 z-10 h-screen w-screen"
+            ref={canvasContainerRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0, ease: 'easeOut' }}
           >
-            <CameraController />
+            <Canvas
+              camera={{
+                position: [0, 0, 3],
+                fov: 70,
+                near: 1,
+                far: 17,
+              }}
+            >
+              <CameraController />
 
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Front.png"
-              position={[0, 0, -2]}
-              size={[16, 9]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={6}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Mid-extended.png"
-              position={[0, 0, -4]}
-              size={[24, 13.5]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={3}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Back.png"
-              position={[0, 0, -6]}
-              size={[28, 15.75]}
-              adjustWithScroll={true}
-              adjustsWithScrollFactor={1}
-            />
-            <ForegroundImage
-              textureUrl="/assets/images/desktop/Back-Silhouette.png"
-              position={[0, 0, -8]}
-              size={[34, 19.7]}
-              adjustWithScroll={false}
-              adjustsWithScrollFactor={24}
-            />
-            <Background
-              textureUrl="/assets/images/desktop/Sky.png"
-              position={[0, 0, -14]}
-              size={[60, 33.75]}
-            />
-
-            <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
-              <Cloud
-                segments={85}
-                bounds={[8, 0, 5]}
-                volume={0.5}
-                color="white"
-                speed={0.3}
-                seed={19}
-                opacity={0.2}
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Front.png"
+                position={[0, 0, -2]}
+                size={[16, 9]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={6}
               />
-            </Clouds>
-
-            <HeroText />
-
-            <EffectComposer multisampling={0}>
-              <DepthOfField
-                focusDistance={0.11}
-                focalLength={0.1}
-                bokehScale={0.1}
-                height={120}
-                width={120}
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Mid-extended.png"
+                position={[0, 0, -4]}
+                size={[24, 13.5]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={3}
               />
-            </EffectComposer>
-          </Canvas>
-        </motion.div>
-      </div>
-      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[60vh]">
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Back.png"
+                position={[0, 0, -6]}
+                size={[28, 15.75]}
+                adjustWithScroll={true}
+                adjustsWithScrollFactor={1}
+              />
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Back-Silhouette.png"
+                position={[0, 0, -8]}
+                size={[34, 19.7]}
+                adjustWithScroll={false}
+                adjustsWithScrollFactor={24}
+              />
+              <ForegroundImage
+                textureUrl="/assets/images/desktop/Sky.png"
+                position={[0, 0, -14]}
+                size={[60, 33.75]}
+                adjustWithScroll={false}
+              />
+
+              <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
+                <Cloud
+                  segments={85}
+                  bounds={[8, 0, 5]}
+                  volume={0.5}
+                  color="white"
+                  speed={0.3}
+                  seed={19}
+                  opacity={0.2}
+                />
+              </Clouds>
+
+              <HeroText />
+
+              <EffectComposer multisampling={0}>
+                <DepthOfField
+                  focusDistance={0.11}
+                  focalLength={0.1}
+                  bokehScale={0.001}
+                  height={120}
+                  width={120}
+                />
+              </EffectComposer>
+            </Canvas>
+          </motion.div>
+        </div>
+      )}
+      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[76px]">
         <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[65px]">
-          <motion.div className="block-copy lg:mb-[130px] lg:max-w-[298px]">
+          <motion.div className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]">
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
               the misty mountains of the Central Range, Taiwan packs the best of
@@ -174,7 +180,7 @@ const Hero: React.FC = () => {
               className="w-full rounded-[30px] md:rounded-[40px] lg:w-auto lg:rounded-[30px]"
             />
           </div>
-          <motion.div className="block-copy lg:mt-[190px] lg:max-w-[300px]">
+          <motion.div className="block-copy md:max-w-[600px] lg:mt-[190px] lg:max-w-[300px]">
             <p>
               Stellar infrastructure means hiking through dramatic gorges,
               cycling along scenic coastlines or criss-crossing the island by
