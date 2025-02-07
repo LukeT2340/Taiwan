@@ -2,7 +2,7 @@ import Video from '../../miscellaneous/Video';
 
 const SectionThree: React.FC = () => (
   <section className="section-three relative">
-    <div className="video-wrappe w-full">
+    <div className="video-wrapper w-full">
       <Video
         scriptUrl="https://players.brightcove.net/6165065566001/wIpGq2Kd0p_default/index.min.js"
         playerId="wIpGq2Kd0p"

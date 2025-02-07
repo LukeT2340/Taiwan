@@ -164,7 +164,13 @@ const Hero: React.FC = () => {
       )}
       <div className="block-two -mt-[2px] bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[76px]">
         <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[40px] 2xl:gap-[65px]">
-          <motion.div className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]">
+          <motion.div
+            className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]"
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          >
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
               the misty mountains of the Central Range, Taiwan packs the best of
@@ -178,14 +184,24 @@ const Hero: React.FC = () => {
               connects these from coast to coast.
             </p>
           </motion.div>
-          <div className="md:w-[600px]">
+          <div className="md:w-[600px] lg:w-auto">
             <MotionImage
               src={imageOne}
               alt="From Taipei’s shimmering skyscrapers and exciting food scene to the misty mountains of the Central Range, Taiwan packs the best of Asia into an island roughly half the size of Tasmania."
               className="w-full rounded-[30px] md:rounded-[40px] lg:max-w-[550px] lg:rounded-[30px]"
+              initial={{ y: 100, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              viewport={{ once: true }}
             />
           </div>
-          <motion.div className="block-copy md:max-w-[600px] lg:mt-[190px] lg:max-w-[300px]">
+          <motion.div
+            className="block-copy md:max-w-[600px] lg:mt-[190px] lg:max-w-[300px]"
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          >
             <p>
               Stellar infrastructure means hiking through dramatic gorges,
               cycling along scenic coastlines or criss-crossing the island by
