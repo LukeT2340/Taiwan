@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
             animate={{ scale: 1 }}
             transition={{ duration: 1.6, delay: 0.1, ease: 'easeOut' }}
           />
-          <div className="relative mx-auto max-w-[336px] md:max-w-[500px]">
+          <div className="relative mx-auto max-w-[336px] lg:max-w-[500px]">
             <motion.h1
               initial={{ x: -200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -169,7 +169,6 @@ const Hero: React.FC = () => {
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
           >
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
@@ -192,7 +191,6 @@ const Hero: React.FC = () => {
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              viewport={{ once: true }}
             />
           </div>
           <motion.div
@@ -200,7 +198,6 @@ const Hero: React.FC = () => {
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
           >
             <p>
               Stellar infrastructure means hiking through dramatic gorges,

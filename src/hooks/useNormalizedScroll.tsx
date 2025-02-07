@@ -21,7 +21,7 @@ const useNormalizedScroll = (ref: any) => {
 
           ticking = false;
         });
-      }, 5);
+      }, 20);
       ticking = true;
     };
 

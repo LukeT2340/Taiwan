@@ -8,56 +8,105 @@ import imageSeven from '/assets/images/desktop/7.jpg';
 import imageEight from '/assets/images/desktop/8.jpg';
 import imageNine from '/assets/images/desktop/9.jpg';
 import Images from './Images';
-import useNormalizedScroll from '../../../hooks/useNormalizedScroll';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const copyContainerRef = useRef<HTMLDivElement>(null);
+  const lastBgColorRef = useRef<string | null>(null);
   const [copyWidth, setCopyWidth] = useState<number | null>(null);
   const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
-  const normScroll = useNormalizedScroll(sectionRef);
+  const lastXRef = useRef<number | null>(null);
+  const isAnimatingRef = useRef<boolean>(false);
 
   const handleResize = useCallback(() => {
     if (!copyContainerRef.current) return;
-
     setCopyWidth(copyContainerRef.current.getBoundingClientRect().width);
     setInnerWidth(window.innerWidth);
   }, []);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    const copyContainer = copyContainerRef.current;
+
+    if (!section || !copyContainer) return;
+
+    // Initial setup
     handleResize();
 
+    // Create ScrollTrigger for the entire section
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+
+        // Determine the new background color
+        const newBgColor =
+          progress < 0.3 ? '#FFB42E' : progress < 0.66 ? '#C7E5D1' : '#004740';
+
+        // Only animate if the background color has changed
+        if (lastBgColorRef.current !== newBgColor) {
+          lastBgColorRef.current = newBgColor;
+
+          gsap.to(section, {
+            backgroundColor: newBgColor,
+            duration: 1,
+            overwrite: true,
+          });
+        }
+
+        if (!copyWidth) return null;
+
+        // Calculate the new X position
+        let newX =
+          progress >= 0.3 && progress < 0.66
+            ? innerWidth / 2 - copyWidth - 80
+            : innerWidth / 2 + 80;
+
+        // Prevent animation retriggers
+        if (lastXRef.current !== newX && copyWidth && !isAnimatingRef.current) {
+          lastXRef.current = newX; // Store last position
+          isAnimatingRef.current = true; // Block retriggers
+
+          gsap.to(copyContainer, {
+            x: newX,
+            duration: 1,
+            ease: 'power2.inOut',
+            overwrite: 'auto',
+            onComplete: () => {
+              isAnimatingRef.current = false; // Allow new animations after completion
+            },
+          });
+        }
+      },
+    });
+
+    // Event listeners
     window.addEventListener('resize', handleResize);
+
+    // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      st.kill();
     };
-  }, [handleResize]);
+  }, [handleResize, copyWidth, innerWidth]);
 
   return (
-    <motion.section
+    <section
       className="section-two relative z-0 hidden bg-yellow pb-[85px] pt-[109px] lg:block"
       ref={sectionRef}
-      animate={{
-        backgroundColor:
-          normScroll < 0.28
-            ? '#FFB42E'
-            : normScroll < 0.7
-              ? '#C7E5D1'
-              : '#004740',
-      }}
-      transition={{ duration: 0.6, delay: 0, ease: 'linear' }}
     >
-      <Images normalizedScroll={normScroll} />
-      <motion.div
+      <Images />
+      <div
         className={`rounded-[30px] bg-white py-[104px] lg:max-w-[520px] lg:px-[60px] xl:max-w-[692px] xl:px-[96px]`}
         ref={copyContainerRef}
-        animate={{
-          transform:
-            normScroll >= 0.28 && normScroll < 0.7 && copyWidth
-              ? `translateX(${innerWidth / 2 - copyWidth - 80}px)`
-              : `translateX(${innerWidth / 2 + 80}px)`,
-        }}
-        transition={{ duration: 0.9, delay: 0, ease: 'easeInOut' }}
+        style={{ transform: `translateX(${innerWidth / 2 + 80}px)` }}
       >
         <p>
           Taiwan’s well-developed rail network is a convenient and enjoyable way
@@ -205,8 +254,8 @@ const SectionTwo: React.FC = () => {
           alt="Taiwan’s most famous is the 960-kilometre Taiwan Cycling Route No. 1 (TCR1), an around-the-island adventure named one of the best bike routes in the world. You’ll glide along stunning coastline, fertile plains, and take on Taiwan’s signature, winding mountain highways."
           className="w-full rounded-[20px]"
         />
-      </motion.div>
-    </motion.section>
+      </div>
+    </section>
   );
 };
 
