@@ -169,6 +169,7 @@ const Hero: React.FC = () => {
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
           >
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
@@ -191,6 +192,7 @@ const Hero: React.FC = () => {
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              viewport={{ once: true }}
             />
           </div>
           <motion.div
@@ -198,6 +200,7 @@ const Hero: React.FC = () => {
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
           >
             <p>
               Stellar infrastructure means hiking through dramatic gorges,
