@@ -8,52 +8,14 @@ import imageSeven from '/assets/images/desktop/7.jpg';
 import imageEight from '/assets/images/desktop/8.jpg';
 import imageNine from '/assets/images/desktop/9.jpg';
 import Images from './Images';
+import useNormalizedScroll from '../../../hooks/useNormalizedScroll';
 
 const SectionTwo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const copyContainerRef = useRef<HTMLDivElement>(null);
-  const [part, setPart] = useState<number>(0);
   const [copyWidth, setCopyWidth] = useState<number | null>(null);
   const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
-  const [normalizedScroll, setNormalizedScroll] = useState<number>(0);
-
-  useEffect(() => {
-    let ticking = false;
-    let scrollTimeout: NodeJS.Timeout;
-
-    const handleScroll = () => {
-      if (ticking) return;
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        requestAnimationFrame(() => {
-          if (!sectionRef.current || !copyContainerRef.current) return;
-
-          const sectionRect = sectionRef.current.getBoundingClientRect();
-          const normScroll =
-            -sectionRect.top / (sectionRect.height - window.innerHeight);
-          setNormalizedScroll(normScroll);
-
-          if (normScroll < 0.28) {
-            setPart(0);
-          } else if (normScroll < 0.7) {
-            setPart(1);
-          } else {
-            setPart(2);
-          }
-          ticking = false;
-        });
-      }, 5);
-      ticking = true;
-    };
-
-    document.addEventListener('scroll', handleScroll);
-
-    return () => {
-      document.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
+  const normScroll = useNormalizedScroll(sectionRef);
 
   const handleResize = useCallback(() => {
     if (!copyContainerRef.current) return;
@@ -77,17 +39,21 @@ const SectionTwo: React.FC = () => {
       ref={sectionRef}
       animate={{
         backgroundColor:
-          part === 0 ? '#FFB42E' : part === 1 ? '#C7E5D1' : '#004740',
+          normScroll < 0.28
+            ? '#FFB42E'
+            : normScroll < 0.7
+              ? '#C7E5D1'
+              : '#004740',
       }}
       transition={{ duration: 0.6, delay: 0, ease: 'linear' }}
     >
-      <Images normalizedScroll={normalizedScroll} />
+      <Images normalizedScroll={normScroll} />
       <motion.div
         className={`rounded-[30px] bg-white py-[104px] lg:max-w-[520px] lg:px-[60px] xl:max-w-[692px] xl:px-[96px]`}
         ref={copyContainerRef}
         animate={{
           transform:
-            part === 1 && copyWidth
+            normScroll >= 0.28 && normScroll < 0.7 && copyWidth
               ? `translateX(${innerWidth / 2 - copyWidth - 80}px)`
               : `translateX(${innerWidth / 2 + 80}px)`,
         }}

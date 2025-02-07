@@ -162,7 +162,7 @@ const Hero: React.FC = () => {
           </motion.div>
         </div>
       )}
-      <div className="block-two bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[76px]">
+      <div className="block-two -mt-[2px] bg-orange pb-[75px] pt-[85px] lg:px-[20px] lg:pt-[76px]">
         <div className="flex flex-col items-center justify-center gap-[54px] px-[30px] text-white lg:flex-row lg:gap-[40px] 2xl:gap-[65px]">
           <motion.div className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]">
             <p>

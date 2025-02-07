@@ -41,49 +41,53 @@ const Images: React.FC<Props> = ({ normalizedScroll }) => {
   }, []);
 
   useEffect(() => {
-    if (
-      !sectionInsetRef.current ||
-      !leftImagesWrapperRef.current ||
-      !innerImageContainerRef.current
-    )
-      return;
+    const timeout = setTimeout(() => {
+      if (
+        !sectionInsetRef.current ||
+        !leftImagesWrapperRef.current ||
+        !innerImageContainerRef.current
+      )
+        return;
 
-    const imageHeight =
-      innerImageContainerRef.current.getBoundingClientRect().height;
+      const imageHeight =
+        innerImageContainerRef.current.getBoundingClientRect().height;
 
-    if (normalizedScroll > 1) {
-      leftImagesWrapperRef.current.style.removeProperty('top');
-      leftImagesWrapperRef.current.style.bottom = `${(1 / 2) * innerHeight - (1 / 2) * imageHeight}px`;
-      setShowImage(5);
-      leftImagesWrapperRef.current.style.position = 'absolute';
-      return;
-    } else {
-      leftImagesWrapperRef.current.style.removeProperty('bottom');
-      leftImagesWrapperRef.current.style.top = `${(1 / 2) * innerHeight - (1 / 2) * imageHeight}px`;
-    }
+      if (normalizedScroll > 1) {
+        leftImagesWrapperRef.current.style.removeProperty('top');
+        leftImagesWrapperRef.current.style.bottom = `${(1 / 2) * window.innerHeight - (1 / 2) * imageHeight}px`;
+        setShowImage(5);
+        leftImagesWrapperRef.current.style.position = 'absolute';
+        return;
+      } else {
+        leftImagesWrapperRef.current.style.removeProperty('bottom');
+        leftImagesWrapperRef.current.style.top = `${(1 / 2) * window.innerHeight - (1 / 2) * imageHeight}px`;
+      }
 
-    if (normalizedScroll < 0) {
-      leftImagesWrapperRef.current.style.position = 'absolute';
-      return;
-    }
+      if (normalizedScroll < 0) {
+        leftImagesWrapperRef.current.style.position = 'absolute';
+        return;
+      }
 
-    leftImagesWrapperRef.current.style.position = 'fixed';
+      leftImagesWrapperRef.current.style.position = 'fixed';
 
-    if (normalizedScroll < 0.11) {
-      setShowImage(0);
-    } else if (normalizedScroll < 0.28) {
-      setShowImage(1);
-    } else if (normalizedScroll > 0.32 && normalizedScroll < 0.5) {
-      setShowImage(2);
-    } else if (normalizedScroll > 0.49 && normalizedScroll < 0.64) {
-      setShowImage(3);
-    } else if (normalizedScroll > 0.74 && normalizedScroll < 0.88) {
-      setShowImage(4);
-    } else if (normalizedScroll > 0.87) {
-      setShowImage(5);
-    } else {
-      setShowImage(-1);
-    }
+      if (normalizedScroll < 0.11) {
+        setShowImage(0);
+      } else if (normalizedScroll < 0.28) {
+        setShowImage(1);
+      } else if (normalizedScroll > 0.32 && normalizedScroll < 0.5) {
+        setShowImage(2);
+      } else if (normalizedScroll > 0.49 && normalizedScroll < 0.64) {
+        setShowImage(3);
+      } else if (normalizedScroll > 0.74 && normalizedScroll < 0.88) {
+        setShowImage(4);
+      } else if (normalizedScroll > 0.87) {
+        setShowImage(5);
+      } else {
+        setShowImage(-1);
+      }
+    }, 5);
+
+    return () => clearTimeout(timeout);
   }, [normalizedScroll]);
 
   return (
