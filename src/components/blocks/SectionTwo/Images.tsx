@@ -262,6 +262,7 @@ const Images = () => {
   useEffect(() => {
     // Update inner height on window resize
     const handleResize = () => {
+      console.log('resize');
       setInnerHeight(window.innerHeight);
     };
     window.addEventListener('resize', handleResize);

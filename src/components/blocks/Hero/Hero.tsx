@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
             />
           </div>
           <motion.div
-            className="block-copy md:max-w-[600px] lg:mt-[190px] lg:max-w-[300px]"
+            className="block-copy md:max-w-[600px] lg:max-w-[300px] lg:pt-[190px]"
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
