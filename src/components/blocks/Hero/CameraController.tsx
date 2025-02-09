@@ -13,6 +13,8 @@ function CameraController() {
   };
 
   useFrame((state, delta) => {
+    if (window.scrollY / window.innerHeight > 1) return;
+
     if (!cameraRef.current) {
       cameraRef.current = state.camera;
       cameraRef.current.position.z = zAnimation.startZ;
@@ -27,14 +29,18 @@ function CameraController() {
 
     const mouseX = state.pointer.x;
     const mouseY = state.pointer.y;
-    targetX = lerp(cameraRef.current.position.x, mouseX * 0.5, 0.01);
-    targetY = lerp(cameraRef.current.position.y, mouseY * 0.5, 0.01);
+    targetX = lerp(cameraRef.current.position.x, mouseX * 0.72, 0.01);
+    targetY = lerp(
+      cameraRef.current.position.y,
+      mouseY - (window.scrollY / window.innerHeight) * 2,
+      0.01
+    );
 
     cameraRef.current.position.x = targetX;
     cameraRef.current.position.y = targetY;
     cameraRef.current.position.z = lerp(
       zAnimation.startZ,
-      zAnimation.endZ,
+      zAnimation.endZ - (window.scrollY / window.innerHeight) * 1.2,
       eased
     );
   });

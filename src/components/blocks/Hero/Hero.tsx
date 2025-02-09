@@ -1,25 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 import { Clouds, Cloud } from '@react-three/drei';
-import { EffectComposer, DepthOfField } from '@react-three/postprocessing';
+import { Vignette } from '@react-three/postprocessing';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
+
 import CameraController from './CameraController';
-import ForegroundImage from './ForegroundImage';
+import ThreeImage from '../../miscellaneous/ThreeImage';
 import HeroText from './HeroText';
 import imageOne from '/assets/images/desktop/1.jpg';
 import heroMobile from '/assets/images/desktop/hero-entire.jpg';
 import { MotionImage } from '../../miscellaneous';
 import useShowCanvas from '../../../hooks/useShowCanvas';
 import front from '/assets/images/desktop/Front.png';
-import mid from '/assets/images/desktop/Mid-extended.png';
+import mid from '/assets/images/desktop/Mid.png';
 import back from '/assets/images/desktop/Back.png';
 import silhouette from '/assets/images/desktop/Back-Silhouette.png';
 import sky from '/assets/images/desktop/Sky.png';
+import { useMediaQuery } from 'react-responsive';
 
 const Hero: React.FC = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const showCanvas = useShowCanvas();
+  const wideScreen = useMediaQuery({ maxAspectRatio: '16/9' });
 
   useEffect(() => {
     if (!showCanvas) return;
@@ -82,7 +86,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="block-one relative z-10 h-[145vh] w-screen bg-orange">
+        <div className="block-one relative z-10 h-[150vh] w-screen bg-orange">
           <motion.div
             className="inset-0 z-10 h-screen w-screen"
             ref={canvasContainerRef}
@@ -93,71 +97,62 @@ const Hero: React.FC = () => {
             <Canvas
               camera={{
                 position: [0, 0, 3],
-                fov: 70,
+                fov: wideScreen ? 80 : 70,
                 near: 1,
-                far: 17,
+                far: 24,
               }}
             >
-              <CameraController />
-
-              <ForegroundImage
-                textureUrl={front}
-                position={[0, 0, -2]}
-                size={[16, 9]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={6}
-              />
-              <ForegroundImage
-                textureUrl={mid}
-                position={[0, 0, -4]}
-                size={[24, 13.5]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={3}
-              />
-              <ForegroundImage
-                textureUrl={back}
-                position={[0, 0, -6]}
-                size={[28, 15.75]}
-                adjustWithScroll={true}
-                adjustsWithScrollFactor={1}
-              />
-              <ForegroundImage
-                textureUrl={silhouette}
-                position={[0, 0, -8]}
-                size={[34, 19.7]}
-                adjustWithScroll={false}
-                adjustsWithScrollFactor={24}
-              />
-              <ForegroundImage
-                textureUrl={sky}
-                position={[0, 0, -14]}
-                size={[60, 33.75]}
-                adjustWithScroll={false}
-              />
-
-              <Clouds material={THREE.MeshBasicMaterial} position={[0, 5, -3]}>
-                <Cloud
-                  segments={85}
-                  bounds={[8, 0, 5]}
-                  volume={0.5}
-                  color="white"
-                  speed={0.3}
-                  seed={19}
-                  opacity={0.2}
+              <Suspense fallback={null}>
+                <CameraController />
+                <ThreeImage
+                  position={[0, 0, -5]}
+                  size={[30, 16.875]}
+                  textureUrl={front}
                 />
-              </Clouds>
-
-              <HeroText />
-
-              <EffectComposer multisampling={0}>
-                <DepthOfField
-                  focusDistance={0.11}
-                  focalLength={0.1}
-                  bokehScale={0.001}
-                  height={120}
-                  width={120}
+                <ThreeImage
+                  position={[0, 0, -8]}
+                  size={[44, 24.75]}
+                  textureUrl={mid}
                 />
-              </EffectComposer>
+                <ThreeImage
+                  position={[0, 0, -12]}
+                  size={[60, 33.75]}
+                  textureUrl={back}
+                />
+                <ThreeImage
+                  position={[0, 0, -14]}
+                  size={[70, 40]}
+                  textureUrl={silhouette}
+                />
+                <ThreeImage
+                  position={[0, 0, -16]}
+                  size={[70, 40]}
+                  textureUrl={sky}
+                />
+                <Clouds
+                  material={THREE.MeshBasicMaterial}
+                  position={[5, 10, -7]}
+                >
+                  <Cloud
+                    segments={40}
+                    bounds={[20, 0, 5]}
+                    volume={0.1}
+                    color="white"
+                    speed={0.3}
+                    seed={28}
+                    opacity={0.25}
+                  />
+                </Clouds>
+                <EffectComposer multisampling={0}>
+                  <Bloom
+                    luminanceThreshold={0.5}
+                    luminanceSmoothing={0.9}
+                    intensity={0.3}
+                  />
+                </EffectComposer>
+
+                <HeroText />
+              </Suspense>
             </Canvas>
           </motion.div>
         </div>
@@ -168,8 +163,7 @@ const Hero: React.FC = () => {
             className="block-copy md:max-w-[600px] lg:mb-[130px] lg:max-w-[298px]"
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           >
             <p>
               From Taipei’s shimmering skyscrapers and exciting food scene to
@@ -191,16 +185,14 @@ const Hero: React.FC = () => {
               className="w-full rounded-[30px] md:rounded-[40px] lg:max-w-[550px] lg:rounded-[30px]"
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
             />
           </div>
           <motion.div
             className="block-copy md:max-w-[600px] lg:max-w-[300px] lg:pt-[190px]"
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
           >
             <p>
               Stellar infrastructure means hiking through dramatic gorges,

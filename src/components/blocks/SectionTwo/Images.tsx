@@ -42,7 +42,7 @@ const Images = () => {
               const progress = self.progress;
               if (
                 (progress > 0.28 && progress < 0.34) ||
-                (progress > 0.64 && progress < 0.7)
+                (progress > 0.64 && progress < 0.72)
               ) {
                 setShowImage(-1);
                 return;

@@ -1,38 +1,36 @@
 import { Html } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { lerp } from 'three/src/math/MathUtils.js';
 
 const HeroText = () => {
   const textContainerRef = useRef<HTMLDivElement>(null);
+  let scaleTarget = 1; // Store the target scale value
+  let scaleCurrent = 1; // Store the current scale value
 
-  useEffect(() => {
-    const useScroll = () => {
-      if (!textContainerRef.current || window.innerWidth < 1025) return;
+  useFrame(() => {
+    if (!textContainerRef.current || window.innerWidth < 1025) return;
 
-      const normalizedScroll = window.scrollY / window.innerHeight;
+    const normalizedScroll = window.scrollY / window.innerHeight;
 
-      if (normalizedScroll > 2) return;
+    if (normalizedScroll > 1) return;
 
-      textContainerRef.current.style.scale = (
-        1 +
-        normalizedScroll ** 1 * 1
-      ).toString();
-      textContainerRef.current.style.transform = `translateY(${-10 * normalizedScroll}vh)`;
-    };
+    // Define target scale
+    scaleTarget = 1 + normalizedScroll * 0.5;
 
-    document.addEventListener('scroll', useScroll);
+    // Smoothly interpolate current scale towards target scale
+    scaleCurrent = lerp(scaleCurrent, scaleTarget, 0.1);
 
-    return () => {
-      document.removeEventListener('scroll', useScroll);
-    };
-  }, []);
+    // Apply the smoothed scale
+    textContainerRef.current.style.scale = scaleCurrent.toString();
+  });
 
   return (
-    <mesh position={[0, 0, 0]}>
+    <mesh position={[0, 0, -2]}>
       <Html className="pointer-events-none" center={true} zIndexRange={[0, 10]}>
         <motion.div
-          className="3xl:max-w-[800px] mx-auto max-w-[541px] font-taiwan"
+          className="mx-auto max-w-[541px] font-taiwan 3xl:max-w-[800px]"
           ref={textContainerRef}
         >
           <motion.h1
